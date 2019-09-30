@@ -1,0 +1,72 @@
+<script template type="text/html">
+    <style>
+        .div-content {
+            background-color: white;
+            padding: 5px 10px;
+            min-width: 1000px;
+        }
+
+        .table-content th {
+            text-align: center !important;
+        }
+
+        .table-content {
+            text-align: center;
+        }
+    </style>
+</script>
+
+<div class="div-content">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>各地区,各类别项目年申报数量表</legend>
+        <form action="" class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">年份选择</label>
+                <div class="layui-input-inline">
+                    <div id="view"></div>
+                    <script id="year" type="text/html">
+                        <select name="year" lay-filter="year">
+                            {{# layui.each(d, function(index, item){ }}
+                            <option value="{{item}}">{{item}}</option>
+                            {{# }) }}
+                        </select>
+                    </script>
+                </div>
+            </div>
+        </form>
+        <table class="layui-table table-content" id="table">
+            <thead>
+            <tr>
+                <th>地区/类别</th>
+                <script
+                        lay-done="layui.data.ProjectStatistic()"
+                        lay-url="json/test/ClassName.json"
+                        template
+                        type="text/html"
+                >
+                    {{# layui.each(d.data,function(index,item){  }}
+                    <th>{{item.class}}</th>
+                    {{# }) }}
+                </script>
+            </tr>
+            </thead>
+            <tbody id="table_content"></tbody>
+            <script id="table_content_template" type="text/html">
+                {{# layui.each(d.data,function(index,item){  }}
+                <tr>
+                    <td>{{item["district"]}}</td>
+                    <td>{{item["技术创新引导专项"]}}</td>
+                    <td>{{item["重点研发计划"]}}</td>
+                    <td>{{item["技术创新引导专项"]}}</td>
+                    <td>{{item["创新平台与人才专项"]}}</td>
+                    <td>{{item["基础研究计划"]}}</td>
+                    <td>{{item["重点实验室"]}}</td>
+                    <td>{{item["工程技术研究中心"]}}</td>
+                    <td>{{item["院士工作站"]}}</td>
+                </tr>
+                {{# }) }}
+            </script>
+        </table>
+    </fieldset>
+</div>
+

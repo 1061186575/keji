@@ -1,0 +1,240 @@
+<script type="text/html" template>
+  <style type="text/css">
+    .layui-form-mid {
+      font-weight: bold;
+      background-color: azure;
+    }
+
+    .fieldset_top {
+      margin-top: 20px;
+    }
+
+    .main_show {
+      margin: 30px;
+    }
+
+    .layui-input {
+      margin-top: 0;
+    }
+
+    /*这里直接修改LAY_app容器的高度，来解决本组件高度自适应带来的显示问题*/
+    #LAY_app {
+      height: 100%;
+    }
+
+    .show-main {
+      background-image: url("../src/style/res/login/login.jpg");
+      height: 100%;
+      min-width: 1000px;
+      overflow: hidden;
+    }
+
+    .summary_note {
+      margin-bottom: 20px;
+    }
+
+    .summary_note::before {
+      content: "*";
+      color: red;
+      font-size: 18px;
+    }
+
+    .footer_style {
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    /*下面直接修改的layui.css原样式*/
+    .layui-form-item {
+      margin-bottom: 5px;
+    }
+
+    .layui-form-pane .layui-form-label {
+      width: 130px;
+    }
+
+    .layui-layout-body {
+      overflow: auto;
+    }
+  </style>
+</script>
+<script
+        type="text/html"
+        template
+        lay-url="./json/user/district.json"
+        lay-done="layui.data.reg()"
+>
+  <section class="show-main">
+    <fieldset class="layui-elem-field layui-field-title fieldset_top">
+      <legend>用户注册</legend>
+    </fieldset>
+    <div class="layui-card main_show">
+      <div class="layui-card-body test">
+        <form class="layui-form layui-form-pane">
+          <summary class="summary_note">用户基本信息</summary>
+          <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+              <input type="text" name="username" lay-verify="required|username" placeholder="请输入用户名"
+                     lay-verify="required" lay-verType="tips" autocomplete="off"
+                     class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">用户名3~25个字符</div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+              <input type="password" name="passwd" id="pwd" lay-verify="required|pass" placeholder="请输入密码"
+                     lay-verType="tips" autocomplete="off"
+                     class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">密码长度不能少于六位</div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-inline">
+              <input type="password" lay-verify="required" id="pwd_check" placeholder="请再次输入密码" lay-verType="tips"
+                     autocomplete="off"
+                     class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">两次输入密码必须保持一致</div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-inline">
+              <input type="text" name="email" lay-verify="required|email" placeholder="请输入邮箱" lay-verType="tips"
+                     autocomplete="off"
+                     class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">请输入有效邮箱地址</div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">真实姓名</label>
+            <div class="layui-input-inline">
+              <input type="text" name="name" lay-verify="required|name" maxlength="10" placeholder="请输入真实姓名"
+                     lay-verType="tips" autocomplete="off"
+                     class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">真名1~10个字符</div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">手机</label>
+            <div class="layui-input-inline">
+              <input type="text" name="phone" lay-verify="required|phone" maxlength="11" placeholder="请输入手机号码"
+                     lay-verType="tips" autocomplete="off"
+                     class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">请输入11位有效手机号码</div>
+          </div>
+          <hr class="layui-bg-green">
+
+          <summary class="summary_note">申请单位信息</summary>
+          <div class="layui-form-item">
+            <label class="layui-form-label">单位名称</label>
+            <div class="layui-input-inline">
+              <input type="text" name="unitName" lay-verify="required" maxlength="40" placeholder="请输入单位名称"
+                     lay-verType="tips" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-form-inline">
+              <label class="layui-form-label">主管部门</label>
+              <div class="layui-input-inline">
+                <input type="text" name="supervisor" lay-verify="required" maxlength="18" placeholder="请输入主管部门"
+                       lay-verType="tips" autocomplete="off"
+                       class="layui-input">
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">单位所在地</label>
+            <div class="layui-input-inline">
+              <select name="district" lay-verify="required" lay-verType="tips">
+                <option value=""></option>
+                {{# layui.each(d.data, function(index, item){ }}
+                <option value="{{item.district1}}">{{item.area}}</option>
+                {{# }); }}
+              </select>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">法人代表</label>
+            <div class="layui-input-inline">
+              <input type="text" name="representative" lay-verify="required" lay-verType="tips" maxlength="18"
+                     placeholder="请输入法人代表" autocomplete="off"
+                     class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">社会信用码</label>
+            <div class="layui-input-inline">
+              <input type="text" name="org_code" lay-verify="required|org_code" lay-verType="tips" maxlength="18"
+                     placeholder="请输入社会信用码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">18位内</div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">通讯地址</label>
+            <div class="layui-input-inline">
+              <input type="text" name="communicateAddress" lay-verify="required" lay-verType="tips"
+                     placeholder="请输入通讯地址" autocomplete="off"
+                     class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">邮编</label>
+            <div class="layui-input-inline">
+              <input type="text" name="postcode" lay-verify="required" maxlength="6" lay-verType="tips"
+                     placeholder="请输入邮编" autocomplete="off"
+                     class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">单位类别</label>
+            <div class="layui-input-inline">
+              <select name="type" lay-verify="required" lay-verType="tips">
+                <option value=""></option>
+                <option value="大专院校">大专院校</option>
+                <option value="科研院所">科研院所</option>
+                <option value="政府部门">政府部门</option>
+                <option value="事业单位">事业单位</option>
+                <option value="国有企业">国有企业</option>
+                <option value="民营企业">民营企业</option>
+                <option value="其他">其他</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">高新技术企业</label>
+            <div class="layui-input-inline">
+              <select name="high_tech" lay-verify="required" lay-verType="tips">
+                <option value=""></option>
+                <option value="是">是</option>
+                <option value="否">否</option>
+              </select>
+            </div>
+          </div>
+
+          <footer class="layui-form-item footer_style">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="register" type="button"
+                      data-type="register">注册
+              </button>
+            </div>
+          </footer>
+        </form>
+      </div>
+    </div>
+  </section>
+</script>
+
+

@@ -1,0 +1,124 @@
+<script type="text/html" template lay-done="layui.data.done()">
+  <form class="layui-form" id="Form1">
+    <div class="layui-form-item">
+      <label class="layui-form-label">计划类别</label>
+      <div class="layui-input-inline">
+        <input type="text" name="mainClassname" lay-verify="required" placeholder="请输入计划类别名称" autocomplete="off"
+               class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">添加子类别</label>
+      <div class="layui-input-inline">
+        <input type="radio" name="flag" value="true" title="是" lay-filter="rad">
+        <input type="radio" name="flag" checked value="false" title="否" lay-filter="rad">
+      </div>
+    </div>
+
+    <div id="view"></div>
+    <div class="layui-form-item" style="text-align: center;">
+      <button class="layui-btn" type="button" lay-submit lay-filter="submit">提交</button>
+    </div>
+  </form>
+</script>
+<script type="text/html" id="template">
+  <div class="layui-form-item">
+    <label class="layui-form-label">子类别名称</label>
+    <div class="layui-input-inline">
+      <input type="text" name="classname" lay-verify="required" placeholder="请输入子类别名称" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">项目简介</label>
+    <div class="layui-input-inline">
+      <input type="text" name="introduction" placeholder="请输入子类别名称" autocomplete="off"
+             class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">开始日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="start" class="layui-input" id="start" autocomplete="off" placeholder="请输入开始日期"
+               lay-verify="required">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">结束日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="end" class="layui-input" id="end" placeholder="请输入结束日期" autocomplete="off"
+               lay-verify="required">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">重点项目</label>
+    <div class="layui-input-inline">
+      <select lay-verify="required" name="is_major">
+        <option value=""></option>
+        <option value="0">否</option>
+        <option value="1">是</option>
+      </select>
+    </div>
+  </div>
+</script>
+<script>
+  layui.data.done = function() {
+    layui.use(["form", "laydate", "table", "layer"], function() {
+      //控制单选框显示与隐藏
+      var form = layui.form,
+        $ = layui.jquery,
+        admin = layui.admin,
+        laydate = layui.laydate,
+        table = layui.table,
+        layer = layui.layer;
+      form.on("radio(rad)", function(data) {
+        if (data.value === "true") {
+          $("#view").append($("#template").html());
+          form.render("select");
+        } else {
+          $("#view").empty();
+        }
+        laydate.render({
+          elem: "#start", //指定元素
+          type: "datetime",
+          format: "yyyyMMddHH"
+        });
+        laydate.render({
+          elem: "#end", //指定元素
+          type: "datetime",
+          format: "yyyyMMddHH"
+        });
+      });
+      form.render();
+      form.on("submit(submit)", function(d) {
+        var data = d.field,
+          url = null;
+        if (data.flag === "false") {
+          url = "/mytio/class/admin/addMClass";
+        } else {
+          url = "/mytio/class/admin/addAll";
+        }
+        admin.req({
+          url: "/",
+          data: data,
+          success: function(obj) {
+            if (obj.code === 0) {
+              layer.msg("添加成功", { time: 2000 }, function() {
+                layer.closeAll();
+                location.reload();
+              });
+            } else {
+              layer.msg("添加失败", { time: 2000 });
+            }
+          }
+        });
+
+        return false;
+      });
+    });
+  };
+</script>

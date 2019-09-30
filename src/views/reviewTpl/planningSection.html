@@ -1,0 +1,215 @@
+<!--
+
+    /**
+     * @author 周鹏
+     * @最后修改日期 2019-05-11 7/24
+     */
+
+-->
+
+<div id='approval' style="margin-top: 20px">
+    <div>
+        经费录入: <input type="number" id="money" style="width: 100px;">万元(请输入非负数)
+    </div>
+    <div  >
+        专家评审:
+        <textarea placeholder="请填写理由" style='height: 90%;margin: 10px 0;'  maxlength='120' class='layui-textarea' id='textarea-text'></textarea>
+    </div>
+
+    <div style='width: 100%; display: block;margin: 20px 0' id="show-textarea">
+        <a class='layui-btn' lay-submit lay-filter='success-result'>立项</a>
+        <a class='layui-btn layui-btn-danger' lay-submit lay-filter='fail-result'>不立项</a>
+        <input type="file" id="qnfile">
+        <button id="qnsubmit" class="layui-btn">开始上传</button>
+    </div>
+
+
+
+
+</div>
+
+<script>
+    layui.use(["form", "layer"], function () {
+        let $ = layui.$;
+        let setter = layui.setter;
+        let form = layui.form;
+        let admin = layui.admin;
+        let layer = layui.layer;
+
+
+        let projectId = layui.data(setter.tableName).projectId;
+        console.log('projectId', projectId);
+        let userId = layui.data(setter.tableName).userId;
+        let text = null; // 提示用户的文本信息
+        let suc_fail_or_return = null; // 判断选择的是同意还是不同意还是退回
+        let proStatus = {}; //状态码
+        let current = null;
+        let Url = "/mytio/user/proStatus/expertUpdate";
+
+
+        admin.req({
+            url: "/mytio/user/proStatus/CurrentStatus?projectId=" + projectId,
+            type: "get",
+            dataType: "json",
+            async: false,
+            contentType: "application/json",
+            success: function (res) {
+                console.log("状态码: ", res);
+                proStatus = res;
+            }
+        });
+
+
+
+        // 发送success或者fail或者return的理由
+        function sendText() {
+            let content = $("#textarea-text").val();
+            let money = $('#money').val() * 1e6;
+            console.log('money',money);
+            layer.confirm(`确定${text}此项目?`, function(index) {
+                console.log("suc_fail_or_return", suc_fail_or_return);
+
+                if (suc_fail_or_return === "success") {
+
+                    switch (proStatus.data) {
+                        case "已审查":current=8;break;
+                    }
+                    Url = `${Url}?projectId=${projectId}&current=${current}&expertComment=${content}&userId=${userId}&${money}`;
+                    sendAjax(Url);
+                }
+
+                if (suc_fail_or_return === "fail") {
+
+                    switch (proStatus.data) {
+                        case "已审查":
+                        {
+                            let Data = {
+                                id: projectId,
+                                current: 105,
+                                expert_comment: content,
+                                setup_operator: userId
+                            };
+                            sendAjax(Url, Data);
+                        }
+                            break;
+
+                        default: {
+                            alert("项目状态码有问题");
+                        }
+                    }
+                }
+
+                layer.close(index);
+            });
+        }
+
+        form.on("submit(success-result)", function(data) {
+            text = data.elem.innerText;
+            suc_fail_or_return = "success";
+            sendText();
+
+        });
+
+        form.on("submit(fail-result)", function(data) {
+            text = `${data.elem.innerText}`;
+            suc_fail_or_return = "fail";
+            sendText();
+
+        });
+
+        // 发送Ajax
+        function sendAjax(url, data) {
+            admin.req({
+                url: url,
+                type: "post",
+                contentType: "application/json",
+                dataType: "json",
+                success: function(res) {
+                    console.log(res);
+                    layer.alert("操作成功", function() {
+                        layui.index.render();
+                    });
+                },
+                error(e) {
+                    layer.alert("操作失败");
+                }
+            });
+        }
+
+
+        /**
+         *  文件上传
+         */
+        var m = new Map();
+
+
+        var token = "";
+
+        $.ajax({
+            type: "get",
+            url: "/mytio/common/file/upload/getToken",
+            success(res) {
+                token = res.data;
+                console.log("token", token);
+            },
+            error() {
+                console.log("err");
+            },
+            complete() {
+                console.log("请求token完成");
+            }
+        });
+
+
+
+        $("#qnsubmit").on("click", function() {
+            let file = document.getElementById('qnfile').files[0];
+
+            console.log(file);
+            console.log(file.name);
+
+            layer.load();
+
+        $.ajax({
+            type: "get",
+            url:
+                "/mytio/common/file/upload?prj_id=" +
+                projectId +
+                "&step=0" +
+                "&fileName=" +
+                file.name,
+            success(res) {
+                var key = res.data;
+                console.log("key", key);
+                console.log("token2",token);
+                var d = new FormData();
+                d.append("token", token);
+                d.append("key", key);
+                d.append("file", file);
+                $.ajax({
+                    url: "https://up-z0.qiniup.com",
+                    type: "POST",
+                    data: d,
+                    processData: false, // tell jQuery not to process the data
+                    contentType: false, // tell jQuery not to set contentType
+                    success: function(data) {
+                        // console.log(data);
+                        layer.closeAll("loading");
+                        layer.alert("上传成功");
+                    }
+                });
+            },
+            error() {
+                alert("error");
+                layer.closeAll("loading");
+            },
+            complete() {
+                layer.closeAll("loading");
+                console.log("complete");
+            }
+        });
+
+
+        });
+    });
+</script>

@@ -1,0 +1,513 @@
+<!--
+
+    /**
+     * @author 周鹏
+     * @最后修改日期 2019-05-11
+     */
+
+-->
+
+<script type="text/html" template>
+    <link rel="stylesheet" href="{{layui.setter.base}}/style/apply/apply.css">
+</script>
+
+<div id="all" class="zp-innovation">
+  <h1 style="margin-bottom: 20px">
+    科技型企业创新创业扶持资金项目申请书(查看)
+  </h1>
+
+  <div>
+    <button id="downloadFile" class="layui-btn layui-btn-xs layui-btn-normal">
+      下载附件
+    </button>
+    <a id="exportWord" class="layui-btn layui-btn-xs layui-btn-normal"
+      >导出word</a
+    >
+<!--    <a id="exportContract" class="layui-btn layui-btn-xs layui-btn-normal"-->
+<!--      >导出合同</a-->
+<!--    >-->
+  </div>
+
+  <br />
+  <div id="view"></div>
+
+  <!-- template -->
+  <script type="text/html" id="render_check_tpl">
+
+
+        <div class="tabtop">
+            <span style="font-size:18px;float: left">推荐单位：{{d.p.recommendName || ''}}</span>
+            <span style="font-size:18px;float: right;">当前状态：{{d.p.current || ''}}</span>
+        </div>
+        <br>
+
+        <div class="all-tab">
+        <div class="layui-tab layui-tab-brief">
+
+            <ul class="layui-tab-title">
+                <li class="layui-this">1.项目基本信息</li>
+                <li>2.项目负责人信息</li>
+                <li>3.牵头承担单位信息</li>
+                <li>4.项目实施情况</li>
+                <li>5.其他多条信息</li>
+            </ul>
+
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <!--项目基本信息-->
+
+                    <table class="layui-table">
+                        <tbody>
+                        <tr>
+                            <td style="width:100px">
+                                <strong>项目名称</strong>
+                            </td>
+                            <td colspan="7">{{d.p.name || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>申请单位</strong>
+                            </td>
+                            <td colspan="5">{{d.p.unitName || ""}}</td>
+                            <td>
+                                <strong>依托研发平台</strong>
+                            </td>
+                            <td>{{d.p.os || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="1"><strong>计划类别</strong></td>
+                            <td colspan="7" style="text-align: left">
+                                {{d.p.classname || ''}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="2" colspan="1">
+                                <strong>项目现处阶段</strong>
+                            </td>
+                            <td rowspan="2" colspan="5">{{d.p.status_description || ''}}</td>
+                            <td>
+                                <strong>主管科室</strong>
+                            </td>
+                            <td>{{d.p.department || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>起止年限</strong>
+                            </td>
+                            <td>{{d.p.start || ''}} -- {{d.p.end || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>技术领域</strong>
+                            </td>
+                            <td colspan="5">{{d.p.tech_area || ""}}</td>
+                            <td>
+                                <strong>所属领域（学科）</strong>
+                            </td>
+                            <td>{{d.p.field || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="1">
+                                <strong>技术来源</strong>
+                            </td>
+                            <td colspan="5">{{d.p.tech_source || ''}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="layui-table">
+                        <tbody>
+                        <tr>
+                            <td rowspan="2">
+                                <strong>项目投资情况 <br>（万元）</strong>
+                            </td>
+                            <td>
+                                <strong>项目总投资</strong>
+                            </td>
+                            <td colspan="2">{{d.p.total/1e6 || ''}}万元</td>
+                            <td>
+                                <strong>银行贷款</strong>
+                            </td>
+                            <td colspan="2">{{d.p.loan/1e6 || ''}}万元</td>
+                            <td>
+                                <strong>单位自筹</strong>
+                            </td>
+                            <td colspan="2">{{d.p.self_fund/1e6 || ''}}万元</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>其他</strong>
+                            </td>
+                            <td colspan="2">{{d.p.other_fund/1e6 || ''}}万元</td>
+                            <td>
+                                <strong>申请资金</strong>
+                            </td>
+                            <td colspan="5">{{d.p.appropriation/1e6 || ''}}万元</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--项目负责人-->
+                <div class="layui-tab-item">
+                    <table class="layui-table">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>姓名</strong>
+                            </td>
+                            <td colspan="2">{{d.leader.name || ''}}</td>
+                            <td>
+                                <strong>性别</strong>
+                            </td>
+                            <td colspan="3">{{d.leader.gender || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>身份证</strong>
+                            </td>
+                            <td colspan="2">{{d.leader.idcode || ''}}</td>
+                            <td>
+                                <strong>出生年月</strong>
+                            </td>
+                            <td colspan="3">{{d.leader.birthday || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>学位</strong>
+                            </td>
+                            <td colspan="2">{{d.leader.degree || ''}}</td>
+                            <td>
+                                <strong>职称</strong>
+                            </td>
+                            <td colspan="3">{{d.leader.title || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>学历</strong>
+                            </td>
+                            <td colspan="2">{{d.leader.xueli || ''}}</td>
+                            <td>
+                                <strong>联系电话（手机）</strong>
+                            </td>
+                            <td colspan="2">{{d.leader.phone || ''}}</td>
+
+                        </tr>
+                        <tr>
+                            <td><strong>邮箱</strong></td>
+                            <td colspan="2">{{d.leader.email || ''}}</td>
+                            <td>
+                                <strong>企业职务</strong>
+                            </td>
+                            <td colspan="2">{{d.leader.position || ''}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>持股比例（%）</strong>
+                            </td>
+                            <td colspan="2">{{d.leader.stock || ''}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--牵头承担单位信息-->
+                <div class="layui-tab-item">
+                    <table class="layui-table">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <strong>单位所在地</strong>
+                            </td>
+                            <td colspan="4">{{d.leaderfirm.area || ''}}</td>
+                            <td>
+                                <strong>主管部门</strong>
+                            </td>
+                            <td>{{d.leaderfirm.supervisor || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>法人代表</strong>
+                            </td>
+                            <td colspan="4">{{d.leaderfirm.representative || ''}}</td>
+                            <td>
+                                <strong>组织机构代码</strong>
+                            </td>
+                            <td>{{d.leaderfirm.org_code || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>通讯地址</strong>
+                            </td>
+                            <td colspan="4">{{d.leaderfirm.district || ''}}</td>
+                            <td>
+                                <strong>邮编</strong>
+                            </td>
+                            <td>{{d.leaderfirm.postcode || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>单位类别</strong>
+                            </td>
+                            <td colspan="4">{{d.leaderfirm.type || ''}}</td>
+
+                            <!--new add 1 -->
+                            <td>
+                                <strong>是否为高新技术企业</strong>
+                            </td>
+                            <td style="min-width: 50px;" class="high">{{d.leaderfirm.high || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>成立时间</strong>
+                            </td>
+                            <td colspan="4">{{d.leaderfirm.setup_time || ''}}</td>
+                            <td>
+                                <strong>注册资金（万元）</strong>
+                            </td>
+                            <td style="min-width: 50px;">{{d.leaderfirm.capital/1e6 || ''}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>职工总数（人）</strong>
+                            </td>
+                            <td colspan="4">{{d.leaderfirm.employee_count || ''}}</td>
+                            <td>
+                                <strong>其中本科以上人员（人）</strong>
+                            </td>
+                            <td style="min-width: 50px;">{{d.leaderfirm.bachelor_count || ''}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>其中研究开发人员（人）</strong>
+                            </td>
+                            <td colspan="7">{{d.leaderfirm.research_count || ''}}</td>
+                        </tr>
+
+                        <!--new add 1 end-->
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--项目实施情况-->
+                <div class="layui-tab-item">
+                    <table class="layui-table" style="margin-top: 30px;">
+                        <tbody>
+
+                        <tr>
+                            <td colspan="7"><strong>项目实施情况（其中软科学研究项目，指研究报告、政策建议、论文与专著等）</strong></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7" style="text-align: left">
+                                经费安排（总投入、研发投入等情况）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <textarea class="layui-textarea" readonly>{{d.p.budget || ''}}</textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7" style="text-align: left">
+                                项目创新点 (不超过500字)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <textarea class="layui-textarea" readonly>{{d.p.innovation || ''}}</textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7" style="text-align: left">
+                                技术创新指标（不超过300字）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <textarea class="layui-textarea" readonly>{{d.p.innovation_index || ''}}</textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7" style="text-align: left">
+                                预期经济、社会、生态效益（不超过500字）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <textarea class="layui-textarea" readonly>{{d.p.benefit || ''}}</textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7" style="text-align: left">
+                                预期人才培养、制度建设、对外交流合作等指标（不超过300字）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <textarea class="layui-textarea" readonly>{{d.p.strength || ''}}</textarea>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 其他信息-->
+                <div class="layui-tab-item">
+                    <!--企业研发与经营状况-->
+                    <div class="zp-title"><strong>【企业研发与经营状况】</strong></div>
+                    <table class="layui-table" style="text-align: center">
+                        <tr>
+                            <td>年份</td>
+                            <td>企业总资产（万元）</td>
+                            <td>研发费用支出（万元）</td>
+                            <td>年度产品销售总额（万元）</td>
+                            <td>年度纳税额（万元）</td>
+                        </tr>
+
+                        {{# layui.each(d.enterprise, function (index, a) { }}
+
+                        <tr>
+                            <td>{{a.year || ''}}</td>
+                            <td>{{a.assets/1e6 || ''}}</td>
+                            <td>{{a.cost/1e6 || ''}}</td>
+                            <td>{{a.sales/1e6 || ''}}</td>
+                            <td>{{a.tax/1e6 || ''}}</td>
+                        </tr>
+
+                        {{#  }); }}
+
+                    </table>
+
+                    <!--合作单位信息-->
+                    <div class="zp-title"><strong>【合作单位信息】</strong></div>
+                    <table class="layui-table" style="text-align: center">
+                        <tr>
+                            <td colspan="3">
+                                <strong>单位名称</strong>
+                            </td>
+                            <td colspan="1">
+                                <strong>单位性质</strong>
+                            </td>
+                            <td colspan="3">
+                                <strong>组织机构代码</strong>
+                            </td>
+                        </tr>
+
+                        {{# layui.each(d.cooperation, function (index, d) { }}
+
+                        <tr class="unit-name-tr">
+                            <td colspan="3">{{d.name || ''}}</td>
+                            <td colspan="1">{{d.type || ''}} </td>
+                            <td colsapn="3">{{d.org_code || ''}} </td>
+                        </tr>
+
+                        {{#  }); }}
+
+                    </table>
+
+                    <!--项目主要参与人员信息-->
+                    <div class="zp-title"><strong>【项目主要参与人员信息】</strong></div>
+                    <table class="layui-table" style="margin-top:30px;text-align: center;">
+                        <tr>
+                            <td>
+                                <strong>姓名</strong>
+                            </td>
+                            <td>
+                                <strong>性别</strong>
+                            </td>
+                            <td>
+                                <strong>年龄</strong>
+                            </td>
+                            <td>
+                                <strong>职称</strong>
+                            </td>
+                            <td colspan="3">
+                                <strong>身份证号</strong>
+                            </td>
+                            <td colspan="3">
+                                <strong>单位</strong>
+                            </td>
+                        </tr>
+
+                        {{# layui.each(d.participate, function (index, a) { }}
+
+                        <tr class="unit-member-tr">
+                            <td>{{a.name || ''}}</td>
+                            <td>{{a.gender || ''}}</td>
+                            <td>{{a.age || ''}}</td>
+                            <td>{{a.title || ''}}</td>
+                            <td colspan="3">{{a.idcode || ''}}</td>
+                            <td colspan="3">{{a.firmName || ''}}</td>
+                        </tr>
+
+                        {{#  }); }}
+
+                    </table>
+
+                    <!--项目相关研发投入信息表-->
+                    <div class="zp-title"><strong>【项目相关研发投入信息表】</strong></div>
+                    <table class="layui-table" style="text-align: center">
+                        <tr>
+                            <td>
+                                <strong>支出内容</strong>
+                            </td>
+                            <td>
+                                <strong>金额（万元）</strong>
+                            </td>
+                            <td>
+                                <strong>其中：财政资金（万元）</strong>
+                            </td>
+                        </tr>
+
+                        {{# layui.each(d.costBudget, function (index, a) { }}
+
+                        <tr>
+                            <td>{{a.subject || ''}}</td>
+                            <td>{{a.fund/1e6 || ''}}</td>
+                            <td>{{a.financial_fund/1e6 || ''}}</td>
+                        </tr>
+
+                        {{#  }); }}
+
+                    </table>
+                </div>
+                <!--其他信息 -- end  -->
+
+
+            </div>
+        </div>
+    </div>
+  </script>
+</div>
+
+<script>
+    layui.use(["getProjectData"], function() {
+        let $ = layui.$;
+        let getProjectData = layui.getProjectData;
+
+        getProjectData.getData();
+    });
+</script>

@@ -1,0 +1,87 @@
+<title>修改科室</title>
+
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">平台说明</a>
+        <a><cite>修改科室</cite></a>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">修改科室</div>
+                <div class="layui-card-body">
+                    <table id="department-table" lay-filter="department-table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="table_bar" type="text/html">
+    <a class="layui-btn layui-btn-primary" lay-event="modify-department">修改科室</a>
+</script>
+
+<script>
+    layui.use(['table', 'layer'], function () {
+        let table = layui.table;
+        let admin = layui.admin;
+        let view = layui.view;
+        let setter = layui.setter;
+        let layer = layui.layer;
+        let $ = layui.$;
+
+        const userId = layui.data(setter.tableName).userId;
+
+        // 修改科室
+        table.render({
+            elem: '#department-table',
+            url: "/", //数据接口
+            page: true, //开启分页
+            cols: [
+                [
+                    //表头
+                    {field: "id",hide: true},
+                    {type: "numbers", title: "序号", align: "center", width: 100},
+                    {field: "name", title: "项目名称", align: "center"},
+                    {field: "current", title: "当前状态", align: "center", width: 100},
+                    {field: "className", title: "项目类别", align: "center"},
+                    {field: "supervisor", title: "主管科室", align: "center"},
+                    {field: "time", title: "申报时间", align: "center"},
+                    {field: "start", title: "开始日期", align: "center"},
+                    {field: "end", title: "结束日期", align: "center"},
+                    {title: "操作", width: 120, toolbar: "#table_bar", align: "center"}
+                ]
+            ],
+            size: "lg",
+            limit: 10,
+            limits: [10]
+        });
+        table.on("tool(department-table)", function (obj) {
+            let data = obj.data;
+            let layEvent = obj.event;
+
+            if (layEvent === "modify-department") {
+                layui.data(setter.tableName, {
+                    key: "projectId",
+                    value: data.id
+                });
+                admin.popup({
+                    title: "修改项目科室",
+                    area: ["500px", "400px"],
+                    move: false,
+                    id: "department-modify",
+                    resize: false,
+                    shadeClose: false,
+                    success: function (layero, index) {
+                        view(this.id).render(
+                            'user/reviewer/accept/content/modifyLayer'
+                        );
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,90 @@
+<script type="text/html" template lay-done="layui.data.addChildCategory()">
+  <form class="layui-form">
+    <input type="hidden" value="{{d.params.mainid}}" name="mainid">
+    <div class="layui-form-item">
+      <label class="layui-form-label">子类别名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="classname" required lay-verify="required" placeholder="请输入子类别名称"
+               autocomplete="off"
+               class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">项目简介</label>
+      <div class="layui-input-inline">
+        <input type="text" name="introduction" placeholder="请输入项目简介" autocomplete="off"
+               class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label class="layui-form-label">开始日期</label>
+        <div class="layui-input-inline">
+          <input type="text" name="start" class="layui-input" id="startDate" placeholder="请输入开始日期" autocomplete="off"
+                 lay-verify="required">
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label class="layui-form-label">结束日期</label>
+        <div class="layui-input-inline">
+          <input type="text" name="end" class="layui-input" id="endDate" placeholder="请输入结束日期" autocomplete="off"
+                 lay-verify="required">
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">重点项目</label>
+      <div class="layui-input-inline">
+        <select lay-verify="required" name="is_major">
+          <option value=""></option>
+          <option value="0">否</option>
+          <option value="1">是</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item" style="text-align: center;">
+      <button class="layui-btn" type="button" lay-submit lay-filter="addChildCategorySubmit">提交</button>
+    </div>
+  </form>
+</script>
+<script>
+  layui.data.addChildCategory = function() {
+    layui.use(["form", "laydate", "table", "layer"], function() {
+      let form = layui.form,
+        admin = layui.admin,
+        laydate = layui.laydate,
+        table = layui.table,
+        layer = layui.layer;
+
+      laydate.render({
+        elem: "#startDate",
+        type: "datetime",
+        format: "yyyyMMddHH"
+      });
+      laydate.render({
+        elem: "#endDate",
+        type: "datetime",
+        format: "yyyyMMddHH"
+      });
+      form.render();
+      form.on("submit(addChildCategorySubmit)", function(data) {
+        admin.req({
+          url: "/",
+          data: data.field,
+          success: function(obj) {
+            if (obj.code === 0) {
+              layer.msg("添加成功", { time: 2000 }, function() {
+                layer.closeAll();
+                table.reload("classManage");
+              });
+            } else {
+              layer.msg("添加失败", { time: 2000 });
+            }
+          }
+        });
+      });
+    });
+  };
+</script>

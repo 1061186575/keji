@@ -1,0 +1,1356 @@
+<!--
+    @Author: 周鹏 2019-08-05
+-->
+<script template type="text/html">
+    <link rel="stylesheet" href="{{layui.setter.base}}/style/apply/apply.css">
+</script>
+
+
+
+<div id="all" class="zp-engineer zp-engineer-modify">
+    <h1>岳阳市工程技术研究中心(修改)</h1>
+
+    <div class="research" id="app-apply">
+        <div id="main">
+
+            <form class="layui-form" id="research-form" lay-filter="project-from">
+                <div style="display: none;">
+                    <input type="text" name="labBase-id">
+                    <input type="text" name="assets-id">
+                    <input type="text" name="labInvest-id">
+                    <input type="text" name="base-id">
+                    <input type="text" name="labInvestSource-id">
+                    <input type="text" name="labSkill-id">
+                    <input type="text" name="rep-id">
+                    <input type="text" name="labStaff-id">
+                </div>
+                <table class="zp-table">
+                    <div class="zp-title">
+                        <strong>【申报单位基本情况】</strong>
+                    </div>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>单位名称</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="firm_name"
+                                   name="base-firm_name"
+                                   placeholder="请输入单位名称" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>计划类别</strong>
+                        </td>
+                        <td colspan="3">
+                            <!-- 计划类别下拉框 -->
+
+
+
+
+                            <script type="text/html" template lay-url="/mytio/common/getChildrenClass?classname=工程技术研究中心" >
+                                <select id="classname" name="labBase-prj_type_id" lay-verify="required" lay-ignore class="c4">
+                                    <option value=""></option>
+                                    {{# layui.each(d.data, function(index, item){ }}
+                                    <option value="{{ item.id }}">{{ item.classname }}</option>
+                                    {{# }); }}
+                                </select>
+                            </script>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>上级主管单位</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="supervisor"
+                                   name="base-supervisor"
+                                   placeholder="请输入上级主管单位" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>通讯地址</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="district"
+                                   name="base-district"
+                                   placeholder="请输入通讯地址" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>邮 编</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="postcode"
+                                   name="base-postcode"
+                                   placeholder="请输入邮编" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>法人代码</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="representative"
+                                   name="base-representative"
+                                   placeholder="请输入法人代码" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>所在地代码</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="location_code"
+                                   name="base-location_code"
+                                   placeholder="请输入所在地代码" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>传 真</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="firm_fax"
+                                   name="base-firm_fax"
+                                   placeholder="请输入传真" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>联系人</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="firm_contact"
+                                   name="base-firm_contact"
+                                   placeholder="请输入联系人" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>联系人电话</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="firm_contact_number"
+                                   name="base-firm_contact_number" lay-verify="required"
+                                   placeholder="请输入联系人电话" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>开户银行</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="bank"
+                                   name="base-bank"
+                                   placeholder="请输入开户银行" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>银行账户</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="bank_account"
+                                   name="base-bank_account"
+                                   placeholder="请输入银行账户" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>信用等级</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="credit_grade"
+                                   name="base-credit_grade"
+                                   placeholder="请输入信用等级" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>单位人员总数</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="employee_count"
+                                   name="base-employee_count"
+                                   placeholder="请输入单位人员总数" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>本科以上人员</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="bachelor_count"
+                                   name="base-bachelor_count"
+                                   placeholder="请输入本科以上人员(数量)" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>研究开发人员</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_count"
+                                   name="base-research_count"
+                                   placeholder="请输入研究开发人员(数量)" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>单位特性(不超过三个)</strong>
+                        </td>
+                        <td colspan="1">
+                            <select id="firm_nature1" lay-ignore name="base-firm_nature1">
+                                <option value=""></option>
+                                <option value="1">高等院校</option>
+                                <option value="2">科研机构</option>
+                                <option value="3">企业</option>
+                            </select>
+                        </td>
+                        <td colspan="1">
+                            <select id="firm_nature2" lay-ignore name="base-firm_nature2">
+                                <option value=""></option>
+                                <option value="1">高等院校</option>
+                                <option value="2">科研机构</option>
+                                <option value="3">企业</option>
+                            </select>
+                        </td>
+                        <td colspan="1">
+                            <select id="firm_nature3" lay-ignore name="base-firm_nature3">
+                                <option value=""></option>
+                                <option value="1">高等院校</option>
+                                <option value="2">科研机构</option>
+                                <option value="3">企业</option>
+                            </select>
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>企业类型</strong>
+                        </td>
+                        <td colspan="3">
+                            <select id="firm_type" lay-ignore name="base-firm_type" lay-verify="required">
+                                <option value=""></option>
+                                <option value="01">国有企业</option>
+                                <option value="02">集体企业</option>
+                                <option value="03">有限责任公司</option>
+                                <option value="04">股份有限公司</option>
+                                <option value="05">私营企业</option>
+                                <option value="06">港澳台商投资企业</option>
+                                <option value="07">外商投资企业</option>
+                                <option value="99">其他企业</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>推荐单位</strong>
+                        </td>
+                        <td colspan="3">
+                            <script type="text/html" template lay-url="/mytio/common/getRecom">
+                                <select id="recomUnit" name="labBase-recommend" lay-verify="required" lay-ignore class="c4">
+                                    <option value=""></option>
+                                    {{#
+                                    layui.each(d.data, function(index, item){
+                                    }}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                    {{# }); }}
+                                </select>
+                            </script>
+                        </td>
+
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>主管科室</strong>
+                        </td>
+                        <td>
+                            <select id="labBase-supervisor" name="labBase-supervisor" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                <option value="2">高新技术发展产业化科</option>
+                                <option value="3">农村科技科</option>
+                                <option value="4">社会发展科技科</option>
+                                <option value="5">科技成果与技术市场科</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="zp-table">
+                    <div class="zp-title" id="rep">
+                        <!--representative-->
+                        <strong>【单位法定代表人情况】</strong>
+                    </div>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>姓名</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="leader_name"
+                                   name="rep-name"
+                                   placeholder="请输入单位名称" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>出生年月</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input lay-DateM" id="leader_birthday"
+                                   name="rep-birthday"
+                                   placeholder="请输入出生年月" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>性别</strong>
+                        </td>
+                        <td colspan="3">
+                            <select lay-ignore name="rep-gender" lay-verify="required">
+                                <option value=""></option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>学历</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="leader_xueli"
+                                   name="rep-xueli"
+                                   placeholder="请输入学历" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>身份证</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="leader_idcode"
+                                   name="rep-idcode" lay-verify="identity"
+                                   placeholder="请输入身份证" style="width: 100%;" type="text">
+                        </td>
+
+                    </tr>
+                </table>
+
+                <table class="zp-table">
+                    <div class="zp-title">
+                        <strong>【资金流动情况】</strong><!--assets-->
+                    </div>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>上年末资产总额(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="assets"
+                                   name="assets-assets"
+                                   placeholder="请输入上年末资产总额" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>上年度支出总额(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="expenditure"
+                                   name="assets-expenditure"
+                                   placeholder="请输入上年度支出总额" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>上年末经费总收入(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="revenue"
+                                   name="assets-revenue"
+                                   placeholder="请输入上年末经费总收入" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>其中: 科研开发支出(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_dev_expenditure"
+                                   name="assets-research_dev_expenditure"
+                                   placeholder="请输入其中: 科研开发支出" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>其中：政府资助总收入(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="government_fund"
+                                   name="assets-government_fund"
+                                   placeholder="请输入其中：政府资助总收入" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>上年度交税总额(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="tax_payment"
+                                   name="assets-tax_payment"
+                                   placeholder="请输入上年度交税总额" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>技术开发总收入(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="tech_dev_revenue"
+                                   name="assets-tech_dev_revenue"
+                                   placeholder="请输入技术开发总收入" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>上年结余经费(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="balance"
+                                   name="assets-balance"
+                                   placeholder="请输入上年结余经费" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                </table>
+
+
+                <div id="view"></div>
+                <script id="research_achieve_tpl" type="text/html">
+                    <table class="zp-table"  id="research_achieve_position">
+                        <div class="zp-title" id="achieve">
+                            <!--achieve 成果-->
+                            <strong>【代表性研究成果及产品和获奖、应用及效益情况】</strong>
+                        </div>
+                        <tr class="zp-bfinput" id="">
+                            <th colspan="1" style="text-align: left;">
+                                <span>代表性研究成果及产品</span>
+                            </th>
+                            <th colspan="1" style="text-align: left;">
+                                <span>获奖、应用及效益情况</span>
+                            </th>
+                        </tr>
+
+                        {{# layui.each(d.research_achieve, function (index, d) { }}
+                        <tr>
+                            <th>
+                                <span hidden>{{d.id}}</span>
+                                <input autocomplete="off" class="zp-input" id="product0" placeholder="请输入代表性研究成果及产品"
+                                       type="text" value="{{d.product}}">
+                            </th>
+                            <th>
+                                <input autocomplete="off" class="zp-input" id="situation0" placeholder="请输入获奖、应用及效益情况"
+                                       type="text" value="{{d.situation}}">
+                            </th>
+                            <th>
+                                <button class="btn btn-delete delete_research_achieve_tr" type="button">
+                                    删除
+                                </button>
+                            </th>
+                        </tr>
+                        {{#  }); }}
+                    </table>
+
+                </script>
+                <button class="btn-dashed" id="research_achieve_btn" type="button">新增一行</button>
+
+                <table>
+                    <div class="zp-title">
+                        <!--labBase 实验室基本-->
+                        <strong>【组建工程中心基本情况】</strong>
+                    </div>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>机构名称</strong>
+                        </td>
+                        <td colspan="6">
+                            <input autocomplete="off" class="zp-input" id="unique-name"
+                                   name="labBase-name"
+                                   placeholder="" style="width: 100%;" type="text" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>组建时间</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input lay-Date" id="formation_time"
+                                   name="labBase-formation_time"
+                                   placeholder="" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>工程技术研究中心通讯地址</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_district"
+                                   name="labBase-district"
+                                   placeholder="" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>实验室联系人</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="project_contact"
+                                   name="labBase-project_contact"
+                                   placeholder="请输入实验室联系人" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>实验室联系人电话</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="project_contact_number"
+                                   name="labBase-project_contact_number" lay-verify="required"
+                                   placeholder="请输入实验室联系人电话" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>组建方式</strong>
+                        </td>
+                        <td colspan="3">
+                            <select id="formation_method" lay-ignore name="labBase-formation_method" lay-verify="required">
+                                <option value=""></option>
+                                <option value="独立组建">独立组建</option>
+                                <option value="联合组建">联合组建</option>
+                            </select>
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>机构性质</strong>
+                        </td>
+                        <td colspan="3">
+                            <select id="unit_type" lay-ignore name="labBase-unit_type" lay-verify="required">
+                                <option value=""></option>
+                                <option value="独立法人">独立法人</option>
+                                <option value="非独立法人">非独立法人</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>组建单位</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="formation_unit"
+                                   name="labBase-formation_unit"
+                                   placeholder="请输入组建单位" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>研究领域</strong>
+                        </td>
+                        <td colspan="3">
+                            <select id="tech_area" lay-ignore name="labBase-tech_area" lay-verify="required">
+                                <option value=""></option>
+                                <option value="农、林、牧">农、林、牧</option>
+                                <option value="电子与信息">电子与信息</option>
+                                <option value="先进制造">先进制造</option>
+                                <option value="新材料">新材料</option>
+                                <option value="医药卫生">医药卫生</option>
+                                <option value="资源环境">资源环境</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>工程中心面积</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="area_occupied"
+                                   name="labBase-area_occupied"
+                                   placeholder="请输入工程中心面积" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>设备总值(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="labBase-total_equipment_value"
+                                   name="labBase-total_equipment_value"
+                                   placeholder="请输入设备总值(万元)" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>十万元以上设备台件数</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="equipment_number"
+                                   name="labBase-equipment_number"
+                                   placeholder="请输入十万元以上设备台件数" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>E-mail</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input"
+                                   name="labBase-email"
+                                   placeholder="请输入E-mail" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" style="margin: 30px; text-align: left;">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>主要研究方向（不超过500字）</strong>
+                            </label>
+                            <textarea id="main_research_direction" name="labBase-main_research_direction"
+                                      placeholder="请输入主要研究方向"
+                            ></textarea>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="zp-table">
+                    <div class="zp-title">
+                        <!--labStaff 实验室人员-->
+                        <strong>【工程技术研究中心人员情况】</strong>
+                    </div>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>职工总数</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_employee_count"
+                                   name="labStaff-employee_count"
+                                   placeholder="请输入职工总数" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>本科以上人员</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_bachelor_count"
+                                   name="labStaff-bachelor_count"
+                                   placeholder="请输入本科以上人员" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>管理人员</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_manager_count"
+                                   name="labStaff-manager_count"
+                                   placeholder="请输入管理人员" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>技术研究人员</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_research_count"
+                                   name="labStaff-research_count"
+                                   placeholder="请输入技术研究人员" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>高级职称</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_senior_title_count"
+                                   name="labStaff-senior_title_count"
+                                   placeholder="请输入高级职称" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>中心人均年龄</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="research_average_age"
+                                   name="labStaff-average_age"
+                                   placeholder="请输入中心人均年龄" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="zp-table">
+                    <div class="zp-title">
+                        <!--labSkill-->
+                        <strong>【工程技术研究中心技术负责人】</strong>
+                    </div>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>姓名</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="skill_name"
+                                   name="labSkill-name"
+                                   placeholder="请输入姓名" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>职务</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="skill_position"
+                                   name="labSkill-position"
+                                   placeholder="请输入职务" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>出生年月</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input lay-DateM" id="skill_birthday"
+                                   name="labSkill-birthday"
+                                   placeholder="请输入出生年月" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>职称</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="skill_title"
+                                   name="labSkill-title"
+                                   placeholder="请输入职称" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>专业</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="skill_profession"
+                                   name="labSkill-profession"
+                                   placeholder="请输入专业" style="width: 100%;" type="text">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>最后学位</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="skill_degree"
+                                   name="labSkill-degree"
+                                   placeholder="请输入最后学位" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="7" style="margin: 30px; text-align: left;">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>主要成就</strong>
+                            </label>
+                            <textarea name="labSkill-main_effort" cols="30" rows="10" placeholder="主要成就"></textarea>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <table class="zp-table">
+                    <div class="zp-title">
+                        <strong>【工程中心组建计划简述】</strong>
+                    </div>
+                    <td colspan="7" style="margin: 30px; text-align: left;">
+                        <label class="label">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>
+                                简述拟组建工程技术研究中心的主要技术特点及优势。组建完成时，
+                                在研究开发、成果转化、人才培养、对外交流、社会经济效益、自我发展能力、组织管理所达到的目标。
+                            </strong>
+                            <textarea id="formation_plan" name="labBase-formation_plan"
+                                      placeholder="请输入组建计划简述"
+                            ></textarea>
+                        </label>
+                    </td>
+                </table>
+
+                <table class="zp-table">
+                    <div class="zp-title">
+                        <!--labInvest-->
+                        <strong>【工程技术研究中心投资估算与资金筹措】</strong>
+                    </div>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>计划总投资</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="plan_invest"
+                                   name="labInvest-plan_invest"
+                                   placeholder="请输入计划总投资" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>已完成投入</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="completed_invest"
+                                   name="labInvest-completed_invest"
+                                   placeholder="请输入已完成投入" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>计划新增投入</strong>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>合计</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="total"
+                                   name="labInvest-total"
+                                   placeholder="请输入合计" style="width: 100%;" type="number">
+                        </td>
+
+
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>运行费用投入</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="run_cost"
+                                   name="labInvest-run_cost"
+                                   placeholder="请输入运行费用投入" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>厂房投入</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="site_invest"
+                                   name="labInvest-site_invest"
+                                   placeholder="请输入厂房投入" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>设备投入</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="equipment_invest"
+                                   name="labInvest-equipment_invest"
+                                   placeholder="请输入设备投入" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>研究费用投入</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input"
+                                   name="labInvest-research_cost"
+                                   placeholder="请输入研究费用投入" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>新增设备投入</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input"
+                                   name="labInvest-equipment_invest_add"
+                                   placeholder="请输入新增设备投入" style="width: 100%;" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>新增研究费用投入</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input"
+                                   name="labInvest-research_cost_add"
+                                   placeholder="请输入新增研究费用投入" style="width: 100%;" type="number">
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="7">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>计划新增投入来源</strong>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>单位自筹(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="self_fund"
+                                   name="labInvestSource-self_fund"
+                                   placeholder="请输入单位自筹(万元)" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>单位自筹到位情况</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="self_fund_in_place"
+                                   name="labInvestSource-self_fund_in_place"
+                                   placeholder="请输入单位自筹到位情况" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>依托单位投入(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="firm_invest"
+                                   name="labInvestSource-firm_invest"
+                                   placeholder="请输入依托单位投入(万元)" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>依托单位投入到位情况</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="firm_invest_in_place"
+                                   name="labInvestSource-firm_invest_in_place"
+                                   placeholder="请输入依托单位投入到位情况" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>主管单位投入(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="supervisor_invest"
+                                   name="labInvestSource-supervisor_invest"
+                                   placeholder="请输入主管单位投入(万元)" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>主管单位投入位情况</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="supervisor_invest_in_place"
+                                   name="labInvestSource-supervisor_invest_in_place"
+                                   placeholder="请输入主管单位投入到位情况" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>推荐单位投入(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="recommend_invest"
+                                   name="labInvestSource-recommend_invest"
+                                   placeholder="请输入推荐单位投入(万元)" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>推荐单位投入到位情况</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="tech_invest_in_place"
+                                   name="labInvestSource-recommend_invest_in_place"
+                                   placeholder="请输入推荐单位投入到位情况" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>市科技局投入(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="kjj_fund"
+                                   name="labInvestSource-kjj_fund"
+                                   placeholder="市科技局投入其他资助(万元)" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>市科技局投入到位情况</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="kjj_fund_in_place"
+                                   name="labInvestSource-kjj_fund_in_place"
+                                   placeholder="请输入市科技局投入到位情况" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>政府其他资助(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input"
+                                   name="labInvestSource-government_fund" id="labInvestSource-government_fund"
+                                   placeholder="请输入政府其他资助(万元)" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>政府其他资助到位情况</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input"
+                                   name="labInvestSource-government_fund_in_place"
+                                   placeholder="请输入政府其他资助到位情况" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>其他(万元)</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="other_fund"
+                                   name="labInvestSource-other_fund"
+                                   placeholder="请输入其他(万元)" style="width: 100%;" type="number">
+                        </td>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>其他到位情况</strong>
+                        </td>
+                        <td colspan="3">
+                            <input autocomplete="off" class="zp-input" id="other_fund_in_place"
+                                   name="labInvestSource-other_fund_in_place"
+                                   placeholder="请输入其他到位情况" style="width: 100%;" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>省科技厅经费主要用途</strong>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>经费使用情况(不超过三个)</strong>
+                        </td>
+                        <td colspan="1">
+                            <select  lay-ignore name="labInvest-usage1">
+                                <option value=""></option>
+                                <option value="1">购置设备</option>
+                                <option value="2">改善场地</option>
+                                <option value="3">运行费用</option>
+                                <option value="4">研究课题</option>
+                                <option value="5">其他</option>
+                            </select>
+                        </td>
+                        <td colspan="1">
+                            <select  lay-ignore name="labInvest-usage2">
+                                <option value=""></option>
+                                <option value="1">购置设备</option>
+                                <option value="2">改善场地</option>
+                                <option value="3">运行费用</option>
+                                <option value="4">研究课题</option>
+                                <option value="5">其他</option>
+                            </select>
+                        </td>
+                        <td colspan="1">
+                            <select  lay-ignore name="labInvest-usage3">
+                                <option value=""></option>
+                                <option value="1">购置设备</option>
+                                <option value="2">改善场地</option>
+                                <option value="3">运行费用</option>
+                                <option value="4">研究课题</option>
+                                <option value="5">其他</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="zp-table">
+                    <div class="zp-title">
+                        <!--labYear-->
+                        <strong>【工程技术研究中心年度经费投入计划】</strong>
+                    </div>
+                    <tr class="zp-bfinput">
+                        <th colspan="1" style="height: 25px;">年度</th>
+                        <th colspan="1" style="height: 25px;">投入经费(万元)</th>
+                        <th colspan="1" style="height: 25px;">用途</th>
+                        <th colspan="1" style="height: 25px;">来源</th>
+                    </tr>
+                    <tr>
+                        <th colspan="1" style="height: 25px;">第一年度</th>
+                        <th colspan="1" style="height: 25px;">
+                            <span hidden id="yearId0"></span>
+                            <input autocomplete="off" class="zp-input" id="invest0"
+                                   name="labYear-invest0"
+                                   placeholder="" style="width: 100%;" type="number">
+                        </th>
+                        <th colspan="1" style="height: 25px;">
+                            <input autocomplete="off" class="zp-input" id="usage0"
+                                   name="labYear-usage0"
+                                   placeholder="" style="width: 100%;" type="text">
+                        </th>
+                        <th colspan="1" style="height: 25px;">
+                            <input autocomplete="off" class="zp-input" id="origin0"
+                                   name="labYear-origin0"
+                                   placeholder="" style="width: 100%;" type="text">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="1" style="height: 25px;">第二年度</th>
+                        <th colspan="1" style="height: 25px;">
+                            <span hidden id="yearId1"></span>
+                            <input autocomplete="off" class="zp-input" id="invest1"
+                                   name="labYear-invest1"
+                                   placeholder="" style="width: 100%;" type="number">
+                        </th>
+                        <th colspan="1" style="height: 25px;">
+                            <input autocomplete="off" class="zp-input" id="usage1"
+                                   name="labYear-usage1"
+                                   placeholder="" style="width: 100%;" type="text">
+                        </th>
+                        <th colspan="1" style="height: 25px;">
+                            <input autocomplete="off" class="zp-input" id="origin1"
+                                   name="labYear-origin1"
+                                   placeholder="" style="width: 100%;" type="text">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="1" style="height: 25px;">第三年度</th>
+                        <th colspan="1" style="height: 25px;">
+                            <span hidden id="yearId2"></span>
+                            <input autocomplete="off" class="zp-input" id="invest2"
+                                   name="labYear-invest2"
+                                   placeholder="" style="width: 100%;" type="number">
+                        </th>
+                        <th colspan="1" style="height: 25px;">
+                            <input autocomplete="off" class="zp-input" id="usage2"
+                                   name="labYear-usage2"
+                                   placeholder="" style="width: 100%;" type="text">
+                        </th>
+                        <th colspan="1" style="height: 25px;">
+                            <input autocomplete="off" class="zp-input" id="origin2"
+                                   name="labYear-origin2"
+                                   placeholder="" style="width: 100%;" type="text">
+                        </th>
+                    </tr>
+                </table>
+
+                <div style="text-align: center;">
+                    <button class="button" lay-submit lay-filter="save" >保存</button>
+                </div>
+            </form>
+
+        </div>
+
+
+        <div id="fileUpload" >
+            <div class="zp-title"><strong>【上传附件】</strong></div>
+            <div style="background-color: #F2F2F2;">
+                <strong>提示:</strong>
+                <span style="color: red">
+                文件名xx.xx，建议不要使用类似xx.xx.xx的格式，
+                单个附件一定不能超过20MB,
+                多个文件请尽量压缩后再上传！
+                </span>
+            </div>
+
+
+            <div class="wrapper">
+                <div style="padding: 20px" >
+                    <strong data-tooltip="这是之前已经上传过的文件" title="123">↓ 已上传文件 ↓</strong>
+                    <div class="layui-upload-list" >
+                        <table class="layui-table" >
+                            <thead>
+                            <tr>
+                                <th>文件名</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="demoList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div  class="layui-upload" style="padding: 20px;margin-top: -30px;" >
+                <div id="upload" >
+                    <strong data-tooltip="选择你想上传的新文件">↓ 新上传文件 ↓</strong>
+                    <form class="layui-form" method="post" enctype="multipart/form-data">
+
+                        <input type="hidden" name="key"  >
+                        <input type="hidden" name="token"  >
+
+                        <table class="layui-table" >
+                            <thead>
+                            <tr style="border: 1px solid #000;" data-tooltip="新上传文件">
+                                <th>文件名</th>
+                                <th>大小</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="list"></tbody>
+                        </table>
+                        <input type="file"  style="width: 75px" name="file"  id="qnfile" >
+                        <button type="button"  class="layui-btn" id="qnsubmit"><i class="layui-icon">&#xe67c;</i>上传</button>
+                    </form>
+                </div>
+
+
+                <p style="margin-top: 30px">
+                <blockquote class="layui-elem-quote">
+                    提交前请确认需上传的文件<span style="color:#F22;">是否已上传</span>，暂存后可以修改，一旦提交需退回才可修改
+                </blockquote>
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    layui.use(['apply_global', 'render', 'form', 'laytpl', 'verify',
+        'research_and_engineer', 'fileUpload', 'modifyPageFile'
+    ], function(){
+        let form = layui.form;
+        let $ = layui.$;
+        let laytpl = layui.laytpl;
+        let setter = layui.setter;
+        let layer = layui.layer;
+        form.render();
+
+        let research_and_engineer = layui.research_and_engineer;
+        research_and_engineer.Render();
+
+        let render = layui.render;
+        render.Render();
+
+        let fileUpload = layui.fileUpload;
+        fileUpload.Render();
+        let modifyPageFile = layui.modifyPageFile;
+        modifyPageFile.Render();
+
+
+        /**
+         *    render_modify_page
+         */
+        let projectId = layui.data(setter.tableName).projectId;
+
+        layer.load();
+
+        console.log(`url: /mytio/user/project/look?projectId=${projectId}`);
+
+
+        let renderData = {};
+        $.ajax({
+            url: `/mytio/user/project/look?projectId=${projectId}`,
+            type: "GET",
+            dataType: "json",
+            async: false,
+            success(data) {
+                console.log("修改页面获取的数据", data);
+                if (!data.ok) {
+                    layer.alert("获取初始数据失败");
+                } else {
+                    // workstation.render_modify_page(data.data);
+                    // render_multiple(data.data);
+                    renderData = data.data;
+                }
+            },
+            error() {
+                layer.alert("获取修改查看页面初始数据失败");
+            },
+            complete() {
+                layer.closeAll("loading");
+            }
+        });
+
+
+
+        let time = setInterval(()=>{
+            console.log('renderSelect');
+            research_and_engineer.render_modify_page(renderData);
+            render_multiple(renderData);
+
+            if (!!$('#classname').length && !!$('#recomUnit').length) {
+                clearInterval(time)
+            }
+        },200);
+        setTimeout(()=>{
+            clearInterval(time);
+        },10*1000);
+
+        /**
+         *  render_multiple
+         */
+
+        function remove_columns(d) {
+
+            return d;
+        }
+
+        function render_multiple(m) {
+            if (!m) return;
+
+            var research_achieve = remove_columns(m.firmBenefitSituation);
+
+            var data = {
+                research_achieve
+            };
+            console.log("render_multiple_data", data);
+
+            laytpl(research_achieve_tpl.innerHTML).render(data, function(html) {
+                document.getElementById("view").innerHTML = html;
+            });
+        }
+
+        Array.from(document.querySelectorAll("#main input")).map((d)=>{
+            if (!d.hasAttribute('lay-verify')) {
+                d.setAttribute('lay-verify', 'required')
+            }
+        });
+        Array.from(document.querySelectorAll("#main textarea")).map((d)=>{
+            if (!d.hasAttribute('lay-verify')) {
+                d.setAttribute('lay-verify', 'required')
+            }
+        });
+
+    })
+</script>
+
+
+
+
+

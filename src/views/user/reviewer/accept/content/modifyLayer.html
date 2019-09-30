@@ -1,0 +1,60 @@
+<script
+        lay-done="layui.data.modify_supervisor();"
+        lay-url="/mytio/common/getDep"
+        template
+        type="text/html"
+>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">主管科室</label>
+            <div class="layui-input-inline">
+                <select name="supervisor">
+                    <option value=""></option>
+                    {{# layui.each(d.data,function(index,item){ }}
+                    <option value="{{item.id}}">{{item.name}}</option>
+                    {{# }) }}
+                </select>
+            </div>
+            <div style="margin: 0 auto; margin-top: 10px;">
+                <button class="layui-btn" lay-submit lay-filter="submit">提交</button>
+            </div>
+        </div>
+    </form>
+</script>
+<script>
+    layui.data.modify_supervisor = function () {
+        layui.use(["form"], function () {
+            let form = layui.form;
+            let layer = layui.layer;
+            let admin = layui.admin;
+            let setter = layui.setter;
+            let projectId = layui.data(setter.tableName).projectId;
+
+            form.render();
+            form.on("submit(submit)", function (obj) {
+                // console.log("field: ", obj.field);
+                admin.req({
+                    url: "/",
+                    type: "GET",
+                    data: {
+                        proId: projectId,
+                        supervisor: obj.field.supervisor
+                    },
+                    success: function (res) {
+                        console.log("res: ", res);
+                        if (0 === res.code) {
+                            layer.msg("项目主管科室修改成功", {
+                                time: 1500
+                            });
+                        } else {
+                            layer.msg("项目主管科室修改失败", {
+                                time: 1500
+                            });
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    };
+</script>

@@ -1,0 +1,144 @@
+<script template type="text/html">
+    <link rel="stylesheet" href="{{layui.setter.base}}/style/admin.css">
+    <style>
+        .section-main-show {
+            padding-top: 30px;
+            background-color: white;
+        }
+
+        .section-main-show {
+            padding-top: 30px;
+            background-color: white;
+        }
+
+        .input-search {
+            width: 212px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .div-table-content {
+            padding: 10px;
+        }
+
+        @media screen and (max-width: 1100px) {
+            .section-main-show {
+                min-width: 1000px;
+            }
+        }
+
+        @media screen and (min-width: 1030px) {
+            .section-main-show {
+                min-width: 1000px;
+            }
+
+            .div-show-search {
+                padding-left: 0;
+            }
+
+            .div-show-search {
+                padding-left: 110px;
+            }
+        }
+    </style>
+</script>
+
+<section class="section-main-show">
+    <form class="layui-form">
+        <script lay-done="console.log(d.data);" lay-url="/mytio/common/subKlass?isMember=true" template
+                type="text/html">
+            <div class="layui-input-inline">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">项目类别:</label>
+                    <div class="layui-input-block">
+                        <select name="viceClass">
+                            <option value=""></option>
+                            {{# layui.each(d.data, function(index, item){ }}
+                            <option value="{{item.classname}}" class="classname">{{ item.classname }}</option>
+                            {{# }); }}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script template type="text/html">
+            <div class="layui-input-inline">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">申报时间:</label>
+                    <div class="layui-input-block">
+                        <select name="year">
+                            <option value=""></option>
+                            {{#
+                            var date = new Date().getFullYear();
+                            var data = [
+                            {date: date},
+                            {date: date - 1},
+                            {date: date - 2},
+                            {date: date - 3},
+                            {date: date - 4},
+                            {date: date - 5}
+                            ];
+                            layui.each(data, function(index, item){
+                            }}
+                            <option value="{{ item.date }}">{{ item.date }}</option>
+                            {{# }); }}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script lay-url="./json/test/address.js?v={{layui.admin.v}}" template type="text/html">
+            <div class="layui-input-inline">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">地区查询:</label>
+                    <div class="layui-input-block">
+                        <select name="area">
+                            <option value=""></option>
+                            {{# layui.each(d.data ,function(index, item){ }}
+                            <option value="{{ item.name }}">{{ item.name }}</option>
+                            {{# }); }}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </script>
+        <script lay-url="/mytio/common/getDep" template type="text/html">
+            <div class="layui-input-inline">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">主管科室:</label>
+                    <div class="layui-input-block">
+                        <select name="supervisor">
+                            <option value=""></option>
+                            {{# layui.each(d.data ,function(index, item){ }}
+                            <option value="{{ item.name }}">{{ item.name }}</option>
+                            {{# }); }}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </script>
+        <script template type="text/html">
+            <div class="layui-input-inline">
+                <div class=" layui-form-item">
+                    <div class="div-show-search">
+                        <input autocomplete="off" class="layui-input input-search" name="name" placeholder="请输入项目名"/>
+                        <button class="layui-btn" id="searchBtn" lay-filter="reloadTable" lay-submit type="button">
+                            确定查询
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </form>
+    <div class="div-table-content">
+        <table class="layui-table" id="table" lay-filter="tableView"></table>
+    </div>
+</section>
+<!--表格中的操作按钮-->
+<script id="test-table-operate-barDemo" type="text/html">
+    <a class="layui-btn layui-btn-xs" lay-event="check">查看</a>
+</script>
+
+

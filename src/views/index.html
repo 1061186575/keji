@@ -1,0 +1,294 @@
+<!--
+
+    /**
+     * @author 周鹏
+     * @创建日期 2019-05-12
+     */
+
+-->
+
+<script type="text/html" template>
+    <link rel="stylesheet" href="{{layui.setter.base}}/style/apply/apply.css">
+</script>
+
+<div id="change-bg-area">
+    <span data-tooltip="随机在护眼、日间等颜色之间切换背景" id="change-bg" >改变背景颜色</span>
+    <input type="color" id="bg-color" value="#00FFFF">
+</div>
+
+<style>
+    .wrapper {
+        width: 800px;
+        min-height: 350px;
+        border: 1px solid #000;
+        margin: 150px auto;
+        padding: 5px;
+        background: #eee;
+        border-radius: 20px;
+    }
+    .wrapper h1 {
+        text-shadow: 0 -1px 5px rgba(0, 0, 0, 0.4);
+        color: #60497c;
+        font-size: 2em;
+        text-align: center;
+        font-weight: bold;
+    }
+    .nav > div .title {
+        display: inline-block;
+        margin: 10px 0;
+        width: 100px;
+        height: 30px;
+        border: 1px solid #000;
+        line-height: 30px;
+        text-align: center;
+        background: rgba(246, 196, 156, 0.8);
+        position: relative;
+        left: 10px;
+    }
+    .nav > div .title:hover {
+        background: #eee;
+        /*cursor: pointer;*/
+    }
+    .nav > div > .content {
+        margin-left: 30px;
+        font-size: 16px;
+    }
+</style>
+
+<div class="wrapper">
+    <h1>平台说明书</h1>
+    <div class="nav" id="user" hidden="hidden">
+        <div>
+            <span class="title">个人资料: </span>
+            <span class="content">提供修改用户个人信息及个人公司信息的功能</span>
+        </div>
+        <div>
+            <span class="title">修改密码: </span>
+            <span class="content">提供用户修改个人密码的功能</span>
+        </div>
+        <div>
+            <span class="title">项目申报: </span>
+            <span class="content"
+            >请您选择所报项目的项目类型以便于你进行项目申报</span
+            >
+        </div>
+        <div>
+            <span class="title">我的项目: </span>
+            <span class="content"
+            >能够查看正在审核中的项目信息</span
+            >
+        </div>
+        <div>
+            <span class="title">未提交项目: </span>
+            <span class="content"
+            >能够查看未提交的项目信息，并提供修改删除功能</span
+            >
+        </div>
+        <div>
+            <span class="title">已退回项目: </span>
+            <span class="content"
+            >能够查看被退回的项目信息，提供修改被退回项目的功能</span
+            >
+        </div>
+        <div>
+            <span class="title">已废止项目: </span>
+            <span class="content"
+            >能够查看被废止的项目信息，提供删除被废止项目的功能</span
+            >
+        </div>
+        <div>
+            <span class="title">文件下载: </span>
+            <span class="content">能够下载到申报项目所需的填写说明和合同书模板</span>
+        </div>
+    </div>
+
+    <div class="nav" id="accept" hidden>
+        <div>
+            <span class="title">个人资料: </span>
+            <span class="content">提供修改个人信息的功能</span>
+        </div>
+        <div>
+            <span class="title">待审核项目: </span>
+            <span class="content"
+            >能够查看需要你审核的项目及其相关信息并进行审核操作</span
+            >
+        </div>
+        <div>
+            <span class="title">已审核项目: </span>
+            <span class="content"
+            >能够查看你已审核项目的相关信息及其审核状态的更新</span
+            >
+        </div>
+        <div>
+            <span class="title">修改科室: </span>
+            <span class="content">能够修改未进行科室审查项目的主管科室</span>
+        </div>
+        <div>
+            <span class="title">项目概览: </span>
+            <span class="content">能够查看所有正在审核的项目及其相关信息</span>
+        </div>
+        <div>
+            <span class="title">项目统计: </span>
+            <span class="content">统计各项目类型不同地区的年申报数量</span>
+        </div>
+    </div>
+
+    <!--超级管理员-->
+    <div class="nav" id="admin" hidden>
+        <div>
+            <span class="title">个人资料: </span>
+            <span class="content">提供修改个人信息的功能</span>
+        </div>
+        <div>
+            <span class="title">用户管理: </span>
+            <span class="content">提供管理普通用户和内部用户相关信息的功能</span>
+        </div>
+        <div>
+            <span class="title">类别管理: </span>
+            <span class="content">提供管理普通用户项目申报的项目类型的功能</span>
+        </div>
+        <div>
+            <span class="title">项目概览: </span>
+            <span class="content">能够查看所有正在审核的项目及其相关信息</span>
+        </div>
+        <div>
+            <span class="title">项目统计: </span>
+            <span class="content">统计各项目类型不同地区的年申报数量</span>
+        </div>
+    </div>
+
+    <div class="nav" id="department" hidden>
+        <div>
+            <span class="title">个人资料: </span>
+            <span class="content">提供修改个人信息的功能</span>
+        </div>
+        <div>
+            <span class="title">待审核项目: </span>
+            <span class="content"
+            >能够查看需要你审查的项目及其相关信息并进行审核操作</span
+            >
+        </div>
+        <div>
+            <span class="title">已审核项目: </span>
+            <span class="content"
+            >能够查看你已审查项目的相关信息及其审核状态的更新</span
+            >
+        </div>
+    </div>
+
+    <!--计划科-->
+    <div class="nav" id="jhk" hidden>
+        <div>
+            <span class="title">个人资料: </span>
+            <span class="content">提供修改个人信息的功能</span>
+        </div>
+        <div>
+            <span class="title">待审核项目: </span>
+            <span class="content"
+            >能够查看需要你审查的项目及其相关信息并进行审核操作</span
+            >
+        </div>
+        <div>
+            <span class="title">已审核项目: </span>
+            <span class="content"
+            >能够查看你已审查项目的相关信息及其审核状态的更新</span
+            >
+        </div>
+        <div>
+            <span class="title">待评审项目: </span>
+            <span class="content"
+            >能够查看正在进行专家评审的项目及其相关信息并进行审核操作</span
+            >
+        </div>
+        <div>
+            <span class="title">已评审项目: </span>
+            <span class="content"
+            >能够查看已评审项目的相关信息及其审核状态的更新</span
+            >
+        </div>
+    </div>
+
+    <!--(推荐单位)-->
+    <div class="nav" id="recommend" hidden>
+        <div>
+            <span class="title">个人资料: </span>
+            <span class="content">提供修改个人信息的功能</span>
+        </div>
+        <div>
+            <span class="title">待审核项目: </span>
+            <span class="content"
+            >能够查看需要你审查的项目及其相关信息并进行审核操作</span
+            >
+        </div>
+        <div>
+            <span class="title">已审核项目: </span>
+            <span class="content"
+            >能够查看你已审核项目的相关信息及其审核状态的更新</span
+            >
+        </div>
+    </div>
+
+    <h1 id="h1" hidden style="font-size: 30px;margin-top: 20px;">无</h1>
+</div>
+
+<script>
+    layui.use(['render'], function() {
+        var $ = layui.$;
+        var render = layui.render;
+        render.Render();
+
+        var user = document.getElementById("user");
+        var accept = document.getElementById("accept");
+        var admin = document.getElementById("admin");
+        var department = document.getElementById("department");
+        var jhk = document.getElementById("jhk");
+        var recommend = document.getElementById("recommend");
+        var h1 = document.getElementById("h1");
+
+        var career = JSON.parse(localStorage.getItem("layuiAdmin")).career;
+        // console.log("career",career);
+
+        let username = JSON.parse(localStorage.getItem("layuiAdmin")).username;
+        // console.log("username",username);
+
+        switch (career) {
+            case "WBYH":
+                user.removeAttribute("hidden");
+                break;
+            case "SLZX":
+                accept.removeAttribute("hidden");
+                break;
+            case "superadmin":
+                admin.removeAttribute("hidden");
+                break;
+            case "QTKS":
+                department.removeAttribute("hidden");
+                break;
+            case "JHK":
+                jhk.removeAttribute("hidden");
+                break;
+            case "TJDW":
+                recommend.removeAttribute("hidden");
+                break;
+            default:
+                h1.removeAttribute("hidden");
+                break;
+        }
+
+        const userId = layui.data(layui.setter.tableName).userId;
+
+        if (career === "WBYH") {
+            $.ajax({
+                type: "GET",
+                url: "/",
+                success(d) {
+
+                },
+                error() {
+                    alert("获取公司信息出错");
+                }
+            });
+        }
+
+    });
+</script>

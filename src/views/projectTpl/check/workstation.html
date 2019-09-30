@@ -1,0 +1,518 @@
+<!--
+
+    /**
+     * @author 周鹏
+     * @最后修改日期 2019-08-08
+     */
+
+-->
+
+
+<script template type="text/html">
+    <link rel="stylesheet" href="{{layui.setter.base}}/style/apply/apply.css">
+</script>
+<style>
+    select {
+        width: 98%;
+        height: 25px;
+        margin: 5px 0 10px 0;
+        padding: 2px;
+        box-sizing: border-box;
+    }
+
+    #all * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: inherit;
+    }
+
+    input, textarea, select {
+        background: rgb(235, 235, 228);
+        /*background: #FFF;*/
+    }
+
+</style>
+
+
+<div class="zp-workstation" id="all" style="width: 750px;">
+    <div hidden id="project-brief">
+        <blockquote class="layui-elem-quote">
+            <h3>该申请表的填写一共分为三部分</h3>
+            <div>一、申报企业基本情况</div>
+            <div>二、进入工作站院士基本情况（如有多位院士，可填写多次）</div>
+            <div>三、进入工作站院士团队基本情况</div>
+        </blockquote>
+    </div>
+
+
+    <h1 id="show-project-brief">岳阳市院士工作站(查看)</h1>
+    <div style="margin: 20px 10px;">
+        <button class="layui-btn layui-btn-xs layui-btn-normal" id="downloadFile">
+            下载附件
+        </button>
+        <a class="layui-btn layui-btn-xs layui-btn-normal" id="exportWord"
+        >导出word</a
+        >
+        <!--        <a id="exportContract" class="layui-btn layui-btn-xs layui-btn-normal"-->
+        <!--        >导出合同</a-->
+        <!--        >-->
+    </div>
+    <div style="margin: 10px">
+        <span style="font-size:18px;float: left">推荐单位：<span id="recommendName"></span> </span>
+        <span style="font-size:18px;float: right;">当前状态：<span id="current"></span> </span>
+    </div>
+    <div style="float: none"></div>
+    <br>
+    <br>
+
+    <form class="layui-form" lay-filter="project-from">
+        <div style="display: none;">
+            <input name="p-id" type="text">
+            <input name="apply-id" type="text">
+        </div>
+        <div id="part1">
+            <div class="zp-title">
+                <strong>
+                    【一、申报企业基本情况】
+                </strong>
+            </div>
+            <div style="text-align: center">
+                <div style="text-align: right;margin-right: 15px;white-space: nowrap">
+                    <span>院士工作站名称</span>
+                    <input name="p-name" placeholder="请输入需要申报的院士工作站名称(仔细确认后再填写，申报成功后院士工作站名称不可修改)" readonly
+                           style="width: 600px;" type="text">
+                </div>
+                <div>
+                    <span class="c1">单位名称</span><input class="clong2 zp-input" name="apply-firm_name" type="text">
+                    <span class="c1">法人代表</span><input class="c4 zp-input" name="apply-representative" type="text">
+                </div>
+                <div>
+                    <span class="c1">地址</span><input class="clong2 zp-input" name="apply-district" type="text">
+                    <span class="c1">邮编</span><input class="c4 zp-input" name="apply-postcode" type="text">
+                </div>
+                <div>
+                    <span class="c1">联系人</span><input class="clong2 zp-input" name="apply-firm_contact" type="text">
+                    <span class="c1">职务</span><input class="c4 zp-input" name="apply-position" type="text">
+                </div>
+                <div>
+                    <span class="c1">手机</span><input class="clong2 zp-input" name="apply-firm_contact_number"
+                                                     type="text">
+                    <span class="c1">电子邮件</span><input class="c4 zp-input" name="apply-email" type="text">
+                </div>
+                <div>
+                    <span class="c1">电 话</span><input class="clong2 zp-input" name="apply-phone" type="text">
+                    <span class="c1">传 真</span><input class="c4 zp-input" name="apply-firm_fax" type="text">
+                </div>
+                <div>
+                    <span class="c1">员工总数</span><input class="clong2 zp-input" name="apply-employee_count" type="text">
+                    <span class="c1">成立时间</span><input class="c4 zp-input lay-Date" name="apply-setup_time" type="text">
+                </div>
+                <div>
+                    <span class="c1">单位资产</span><input class="clong2 zp-input" name="apply-firm_assets" type="text">
+                    <span class="c1">所属行业</span><input class="c4 zp-input" name="apply-industry" type="text">
+                </div>
+                <div style="">
+                    <span class="c1">单位网址</span><input class="clong2 zp-input" name="apply-firm_website" style=""
+                                                       type="text">
+                    <span>
+                        <span class="c1">计划类别</span>
+                        <script lay-url="/mytio/common/getChildrenClass?classname=院士工作站" template type="text/html">
+                                <select id="classname" name="p-prj_type_id" lay-verify="required" lay-ignore class="c4">
+                                    <option value=""></option>
+                                    {{# layui.each(d.data, function(index, item){ }}
+                                    <option value="{{ item.id }}">{{ item.classname }}</option>
+                                    {{# }); }}
+                                </select>
+                        </script>
+                    </span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="zp-bfinput"
+                    style="width: 100%;font-size: 16px;text-align: left;padding-left: 30px;margin-top: 10px;">单 位 简
+                    介</h3>
+                <textarea cols="30" id="" name="p-firm_introduction" rows="10"></textarea>
+            </div>
+
+            <div>
+                <h3 class="zp-bfinput"
+                    style="width: 100%;font-size: 16px;text-align: left;padding-left: 30px;margin-top: 10px;">
+                    主要业务领域</h3>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input lay-skin="primary" name="p-tech_area" title="信息与通信技术" type="radio" value="信息与通信技术">
+                        <input lay-skin="primary" name="p-tech_area" title="生物医药" type="radio" value="生物医药">
+                        <input lay-skin="primary" name="p-tech_area" title="能源与环境" type="radio" value="能源与环境">
+                        <input lay-skin="primary" name="p-tech_area" title="冶金" type="radio" value="冶金">
+                        <input lay-skin="primary" name="p-tech_area" title="制造业" type="radio" value="制造业">
+                        <br>
+
+                        <input id="other-tech_area_radio" lay-skin="primary" name="p-tech_area" title="其他" type="radio"
+                               value="其他">
+                        <input id="other-tech_area" name="" placeholder="请输入" style="display: none;" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="zp-bfinput"
+                    style="width: 100%;font-size: 16px;text-align: left;padding-left: 30px;margin-top: 10px;">
+                    建站目的及需要解决的重点问题 （简述并附详细资料）</h3>
+                建站目的：
+                <textarea cols="30" name="p-site_purpose" placeholder="建站目的：" rows="10"></textarea>
+                需要解决的重点问题：
+                <textarea cols="30" name="p-key_issue" placeholder="需要解决的重点问题：" rows="10"></textarea>
+            </div>
+
+            <div>
+                <h3 class="zp-bfinput"
+                    style="width: 100%;font-size: 16px;text-align: left;padding-left: 30px;margin-top: 10px;">
+                    为院士及其团队提供工作设施和生活条件情况
+                </h3>
+                <textarea cols="30" name="p-living_condition" placeholder="" rows="10"></textarea>
+            </div>
+
+        </div>
+
+        <div id="part2">
+            <div class="zp-title">
+                <strong>
+                    【二、进入工作站院士基本情况（如有多位院士，可填写多份）】
+                </strong>
+            </div>
+
+            <div id="view"></div>
+            <!--academician-->
+            <script id="multipleID" type="text/html">
+
+                {{# layui.each(d.academician, function (index, d) { }}
+
+                <div style="text-align: left" class="add_academician_elem">
+                    <input type="hidden" name="ac-id" value="{{d.id1}}">
+                    <input type="hidden" name="ac_aoo-id" value="{{d.id2}}">
+                    <div class="zp-bfinput" style="width: 100%;font-size: 22px;text-align: center;">
+                        当前是第<span class="number_academician">1</span>份院士基本情况
+
+                    </div>
+                    <div>
+                        <span class="c1">院士姓名</span><input name="ac-name" value="{{d.name}}" type="text"
+                                                           class="clong2 zp-input">
+                        <span class="c1">出生日期</span><input name="ac-birthday" value="{{d.birthday}}" type="text"
+                                                           class="c4 zp-input">
+                    </div>
+                    <div>
+                        <span class="c1">学科领域</span><input name="ac-tech_area" value="{{d.tech_area}}" type="text"
+                                                           class="clong2 zp-input">
+                        <span class="c1">邮箱地址</span><input name="ac-email" value="{{d.email}}" type="text"
+                                                           class="c4 zp-input">
+                    </div>
+                    <div>
+                        <span class="c1">院士联系电话</span><input name="ac-phone" value="{{d.phone}}" type="text"
+                                                             class="clong2 zp-input">
+                        <span class="c1">传真</span><input name="ac-fax" value="{{d.fax}}" type="text"
+                                                         class="c4 zp-input">
+                    </div>
+                    <div>
+                        <span class="c1">工作单位</span><input name="ac-firm_name" value="{{d.firm_name}}" type="text"
+                                                           class="clong2 zp-input">
+                        <span class="c1">是否是驻湘院士</span>
+                        <select name="ac-enter" class="c4" lay-ignore>
+                            <option value="{{d.enter}}">{{d.enter}}</option>
+                            <option value="是">是</option>
+                            <option value="否">否</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span class="c1" style="">是中国工程院还是中国科学院院士</span>
+                        <select name="ac-from" class="clong2" lay-ignore>
+                            <option value="{{d.come_from}}">{{d.come_from}}</option>
+                            <option value="中国工程院">中国工程院</option>
+                            <option value="中国科学院院士">中国科学院院士</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <h3 class="zp-bfinput"
+                            style="width: 100%;font-size: 16px;text-align: left;padding-left: 30px;margin-top: 10px;">
+                            院士与企业合作项目情况
+                        </h3>
+                        <div>
+                            <span class="c1">项目名称</span>
+                            <input name="ac_aoo-project_name" value="{{d.project_name}}" type="text"
+                                   class="clong2 zp-input">
+                        </div>
+                        <div>
+                            <span class="c1">项目合作起止时间</span>
+                            <input name="ac_aoo-start" value="{{d.start}}" type="text" class=" zp-input"
+                                   style="width: 95px;" placeholder="开始时间">
+                            <input name="ac_aoo-end" value="{{d.end}}" type="text" class=" zp-input"
+                                   style="width: 95px;" placeholder="结束时间">
+                            <span class="c1">销售收入（万元）</span>
+                            <input name="ac_aoo-sale_revenue" value="{{d.sale_revenue / 1e6}}" type="text"
+                                   class="c4 zp-input">
+                        </div>
+                        <div>
+                            <span class="c1">利税（万元）</span>
+                            <input name="ac_aoo-loan" value="{{d.loan  / 1e6}}" type="text" class="clong2 zp-input">
+                            <span class="c1">新增就业</span>
+                            <input name="ac_aoo-new_employment" value="{{d.new_employment}}" type="text"
+                                   class="c4 zp-input">
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="zp-bfinput"
+                            style="width: 100%;font-size: 16px;text-align: left;padding-left: 30px;margin-top: 10px;">
+                            申报专利或品种审定
+                        </h3>
+                        <textarea name="ac_aoo-patent_or_variety" cols="30" rows="10" placeholder="">{{d.patent_or_variety}}</textarea>
+                    </div>
+                    <div>
+                        <h3 class="zp-bfinput"
+                            style="width: 100%;font-size: 16px;text-align: left;padding-left: 30px;margin-top: 10px;">
+                            经费投入情况
+                        </h3>
+                        <textarea name="ac_aoo-invest_fund" cols="30" rows="10"
+                                  placeholder="">{{d.invest_fund}}</textarea>
+                    </div>
+                    <div style="margin-bottom: 30px;">
+                        <h3 class="zp-bfinput"
+                            style="width: 100%;font-size: 16px;text-align: left;padding-left: 30px;margin-top: 10px;">
+                            研究重点和经济、社会效益分析
+                        </h3>
+                        <textarea name="ac_aoo-benefit_analysis" cols="30" rows="10" placeholder="">{{d.benefit_analysis}}</textarea>
+                    </div>
+
+                </div>
+
+                {{# }); }}
+            </script>
+
+
+        </div>
+
+
+        <div id="part3">
+            <div class="zp-title">
+                <strong>
+                    【三、进入工作站院士团队基本情况】
+                </strong>
+            </div>
+            <div style="text-align: center">
+                <div id="view2"></div>
+                <script id="multipleID2" type="text/html">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th width="80px">姓名</th>
+                            <th width="80px">单位</th>
+                            <th width="80px">职称\职务</th>
+                            <th width="80px">联系电话</th>
+                            <th width="210px">专长、研究成果应用及获奖情况</th>
+                            <th width="130px">哪年开始与企业合作</th>
+
+                        </tr>
+                        </thead>
+
+                        <tbody id="append_team_position">
+
+                        {{# layui.each(d.academicianTeamSituation, function (index, d) { }}
+                        <tr class="add_team_tr">
+                            <td hidden>{{d.id}}</td>
+                            <td><input type="text" style="width: 80px;" name="situation-name" value="{{d.name}}"></td>
+                            <td><input type="text" style="width: 80px;" name="situation-firm_name"
+                                       value="{{d.firm_name}}"></td>
+                            <td><input type="text" style="width: 80px;" name="situation-title" value="{{d.title}}"></td>
+                            <td><input type="text" style="width: 100px;" name="situation-phone" value="{{d.phone}}">
+                            </td>
+                            <td><input type="text" style="width: 200px;" name="situation-effort" value="{{d.effort}}">
+                            </td>
+                            <td><input type="text" style="width: 120px;" name="situation-start_time"
+                                       value="{{d.start_time}}" class="lay-DateY"></td>
+
+                        </tr>
+                        {{# }); }}
+                        </tbody>
+                    </table>
+
+
+                </script>
+
+            </div>
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
+<script>
+    layui.use(['apply_global', 'render', 'form', 'laytpl', 'workstation', 'word_workstation'
+    ], function () {
+        let $ = layui.$;
+        let laytpl = layui.laytpl;
+        let form = layui.form;
+        let setter = layui.setter;
+        let admin = layui.admin;
+        let layer = layui.layer;
+        form.render();
+        let render = layui.render;
+        render.Render();
+        let workstation = layui.workstation;
+        workstation.Render();
+
+        let word_workstation = layui.word_workstation;
+
+        $("#exportWord").on('click', function () {
+            word_workstation.wordDownload();
+        });
+
+
+        let render_achieve = false;
+
+        let projectId = layui.data(setter.tableName).projectId;
+        $.ajax({
+            url: "/mytio/user/proStatus/CurrentStatus?projectId=" + projectId,
+            type: "get",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (h) {
+                console.log("状态码res", h);
+                $('#current').text(h.data);
+                if (h.data === "已立项") {
+                    $("#exportContract").attr("href", "../static/contract.docx");
+                } else {
+                    $("#exportContract").remove();
+                }
+            }
+        });
+
+
+        /**
+         *    render_modify_page
+         */
+
+
+        layer.load();
+
+        console.log(`url: /mytio/user/project/look?projectId=${projectId}`);
+
+        let renderData = {};
+        $.ajax({
+            url: `/mytio/user/project/look?projectId=${projectId}`,
+            type: "GET",
+            dataType: "json",
+            async: false,
+            success(data) {
+                console.log("修改页面获取的数据", data);
+                if (!data.ok) {
+                    layer.alert("获取初始数据失败");
+                } else {
+                    renderData = data.data;
+                }
+            },
+            error() {
+                layer.alert("获取修改查看页面初始数据失败");
+            },
+            complete() {
+                layer.closeAll("loading");
+            }
+        });
+
+
+        let time = setInterval(() => {
+            console.log('renderSelect');
+            workstation.render_modify_page(renderData);
+            render_multiple(renderData);
+
+            if (!!$('#classname').length) {
+                clearInterval(time)
+            }
+        }, 100);
+
+        $("#downloadFile").on("click", function () {
+            admin.popup({
+                title: "下载附件",
+                area: ["860px", "500px"],
+                id: new Date().getTime(),
+                shadeClose: false,
+                success: function (layero, index) {
+                    layui.view(this.id).render("download/download");
+                }
+            });
+        });
+
+
+        /**
+         *  render_multiple
+         */
+        function remove_columns(d) {
+            return d;
+        }
+
+
+        function render_multiple(m) {
+            if (!m) return;
+
+            let academician = remove_columns(m.academician);
+            let academicianCooperationProject = remove_columns(m.academicianCooperationProject);
+            let academicianTeamSituation = remove_columns(m.academicianTeamSituation);
+
+
+            for (let i = 0; i < academicianCooperationProject.length; i++) {
+                academician[i].id1 = academician[i].id;
+                academician[i].id2 = academicianCooperationProject[i].id;
+                for (let d in academicianCooperationProject[i]) {
+                    academician[i][d] = academicianCooperationProject[i][d];
+                }
+            }
+
+
+            let data = {
+                academician,
+                academicianTeamSituation
+            };
+            // console.log("render_multiple_data", data);
+
+
+            laytpl(multipleID.innerHTML).render(data, function (html) {
+                document.getElementById("view").innerHTML = html;
+            });
+            laytpl(multipleID2.innerHTML).render(data, function (html) {
+                document.getElementById("view2").innerHTML = html;
+            });
+
+            for (let i = 0; i < $(".number_academician").length; i++) {
+                $(".number_academician").eq(i).text(i + 1);
+            }
+
+            render_achieve = true;
+        }
+
+        let timeId = setInterval(function () {
+            Array.from(document.querySelectorAll("input")).map(function (d) {
+                d.setAttribute('disabled', 'disabled');
+                d.setAttribute('readonly', 'readonly');
+            });
+            Array.from(document.querySelectorAll("textarea")).map(function (d) {
+                d.setAttribute('disabled', 'disabled');
+                d.setAttribute('readonly', 'readonly');
+            });
+            Array.from(document.querySelectorAll("select")).map(function (d) {
+                d.setAttribute('disabled', 'disabled');
+                d.setAttribute('readonly', 'readonly');
+            });
+
+            if (render_achieve) {
+                clearInterval(timeId);
+            }
+        }, 800);
+
+
+    });
+
+</script>

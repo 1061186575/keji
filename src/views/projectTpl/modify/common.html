@@ -1,0 +1,869 @@
+<!--
+
+    /**
+     * @author 周鹏
+     * @最后修改日期 2019-05-11 7/24
+     */
+
+-->
+
+
+<script type="text/html" template>
+    <link rel="stylesheet" href="{{layui.setter.base}}/style/apply/apply.css">
+</script>
+
+
+
+<div id="all">
+    <div id="identifier-modify" style="display:none;">identifier-modify 请勿删除</div>
+    <h1>基础研究计划项目申报(修改)</h1>
+
+    <div id="app-apply" class="zp-common">
+
+        <div class="zp-title">
+            <strong>
+                【项目基本信息】
+            </strong>
+        </div>
+        <form class="layui-form" id="formData" lay-filter="project-from">
+            <input type="hidden" name="p-id">
+            <input type="hidden" name="leader-id">
+            <input type="hidden" name="head-id">
+
+
+            <table class="zp-table" id="base" style="text-align: center; width: 100%; ">
+
+                <tr>
+                    <td colspan="1" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>项目名称</strong>
+                    </td>
+                    <td colspan="6">
+                        <input type="text" readonly style="width: 100%;" id="project-name" name="p-name" lay-verify="names|required" autocomplete="off" class="zp-input" placeholder="请输入项目名称" >
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <td colspan="1" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>计划类别</strong>
+                    </td>
+
+                    <td colspan="3">
+
+                        <!-- 计划类别下拉框 -->
+
+
+                        <script type="text/html" template lay-url="/mytio/common/getChildrenClass?classname=基础研究计划" >
+                            <select id="classname" name="p-prj_type_id" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#
+                                layui.each(d.data, function(index, item){
+                                }}
+
+                                <option value="{{ item.id }}">{{ item.classname }}</option>
+
+                                {{# }); }}
+                            </select>
+                        </script>
+
+
+                    </td>
+
+
+                    <td colspan="1" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>申请单位</strong>
+                    </td>
+
+                    <td colspan="3" class="">
+                        <input type="text" lay-verify="required" class="zp-input borderColor" name="p-companyName" id="companyName" readonly title="不可更改" >
+                    </td>
+                </tr>
+
+
+                <tr >
+                    <td rowspan="1" class="zp-bfinput">
+
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>项目现处阶段</strong>
+
+                    </td>
+                    <td rowspan="1" colspan="3">
+                        <script type="text/html" template lay-url="/mytio/common/getStatus">
+                            <select name="p-status_description" id="status_description" lay-verify="required" lay-ignore>
+                                <option value="" ></option>
+                                {{#
+                                layui.each(d.data, function(index, item){
+                                }}
+                                <option value="{{ item }}">{{ item }}</option>
+                                {{# }); }}
+                            </select>
+                        </script>
+
+
+                    </td>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>主管科室</strong>
+                    </td>
+                    <td colspan="2">
+                        <!-- 主管科室下拉框 -->
+                        <script type="text/html" template lay-url="/mytio/common/getDep">
+                            <select name="p-supervisor" id="supervisor" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#
+                                layui.each(d.data, function(index, item){
+                                }}
+                                <option value="{{ item.id }}">{{ item.name }}</option>
+                                {{# }); }}
+                            </select>
+                        </script>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>推荐单位</strong>
+                    </td>
+                    <td rowspan="1" colspan="3">
+                        <script type="text/html" template lay-url="/mytio/common/getRecom">
+                            <select id="recomUnit" name="p-recommend" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#
+                                layui.each(d.data, function(index, item){
+                                }}
+                                <option value="{{ item.id }}">{{ item.name }}</option>
+                                {{# }); }}
+                            </select>
+                        </script>
+                    </td>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>技术来源</strong>
+                    </td>
+                    <td colspan="3">
+                        <!-- 技术来源下拉框 -->
+                        <script type="text/html" template lay-url="/mytio/common/getSource">
+                            <select id="tech-source" name="p-tech_source" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#
+                                layui.each(d.data, function(index, item){
+                                }}
+                                <option value="{{ item }}">{{ item }}</option>
+                                {{# }); }}
+                            </select>
+                        </script>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>技术领域</strong></td>
+                    <td colspan="3">
+
+                        <input type="text" name="p-tech_area" id="tech_area" lay-verify="required" class="zp-input" autocomplete="off"  placeholder="请输入技术领域">
+                    </td>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>所属领域(学科)</strong>
+                    </td>
+                    <td colspan="2" class="">
+                        <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                            <select id="field" name="p-field" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#  layui.each(d.data.field, function(index, item){  }}
+                                <option>{{ item }}</option>
+                                {{#  }); }}
+                            </select>
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>开始年限</strong>
+                    </td>
+                    <td colspan="3">
+                        <input type="text" class="zp-input lay-Date" lay-verify="required" autocomplete="off" placeholder="请选择开始日期"
+                               id="start" name="p-start" >
+                    </td>
+                    <td colspan="1" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>依托研发平台</strong>
+                    </td>
+
+                    <td colspan="2">
+                        <!-- 依托研发平台下拉框 -->
+                        <script type="text/html" template lay-url="/mytio/common/getPlatform">
+                            <select id="os" name="p-os" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#
+                                layui.each(d.data, function(index, item){
+                                }}
+                                <option value="{{ item }}">{{ item }}</option>
+                                {{# }); }}
+                            </select>
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>结束年限</strong>
+                    </td>
+                    <td colspan="1">
+                        <input type="text" id="end" name="p-end" class="zp-input lay-Date" lay-verify="required" autocomplete="off" placeholder="请选择结束日期"
+                                >
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+            <!--项目投资情况-->
+            <div class="zp-title">
+                <strong>
+                    <span style="text-align:left"> 【项目投资情况】 </span>
+                </strong>
+            </div>
+
+
+
+            <table class="zp-table" id="investment" style="width: 100%;">
+
+                <tr>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>项目总投资</strong> <br>
+                        <span style="color: red;font-size: 0.5em;">(自动相加，不用输入) </span> <br>
+                    </td>
+                    <td>
+                        <input type="number" style="cursor: not-allowed; width: 120px; height: 30px; color: red; padding: 5px; box-sizing: border-box" name="p-total" autocomplete="off" class="" id="total" readonly min="0" >
+                        （万元）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>银行贷款</strong>
+                    </td>
+                    <td>
+                        <input type="number" style="width: 120px;" name="p-loan" lay-verify="num|required" autocomplete="off" class="zp-input num" id="loan" min="0" >
+                        （万元）
+                    </td>
+                    <td class="zp-bfinput" style="position: relative;left: 15px"><span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>单位自筹</strong>
+                    </td>
+                    <td style="position: relative;left: 15px">
+                        <input type="number" style="width: 120px;" name="p-self_fund" lay-verify="num|required" autocomplete="off" class="zp-input num" id="self-fund" min="0" >
+                        （万元）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>其他</strong>
+                    </td>
+                    <td>
+                        <input type="number" style="width: 120px;" name="p-other_fund" lay-verify="num|required" autocomplete="off" class="zp-input num" id="other-fund" min="0" >
+                        （万元）
+                    </td>
+                    <td class="zp-bfinput" style="position: relative;left: 15px">
+                        <span style="color: rgb(219, 83, 49);">*</span>
+                        <strong>申请资金</strong>
+                    </td>
+                    <td colspan="3" style="position: relative;left: 15px">
+                        <input type="number" style="width: 120px;" name="p-appropriation" lay-verify="num|required" autocomplete="off" class="zp-input num" id="appropriation" min="0" >
+                        （万元）
+                    </td>
+                </tr>
+            </table>
+
+
+
+            <div class="zp-title">
+                <strong>【项目负责人信息】 </strong>
+            </div>
+            <!--项目负责人信息-->
+            <table class="zp-table leader" style="text-align: center; width: 100%;" >
+                <tr>
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>姓名
+                    </td>
+                    <td colspan="" >
+                        <input type="text" name="leader-name" lay-verify="required" autocomplete="off" class="zp-input" placeholder="请输入姓名" >
+                    </td>
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>性别
+                    </td>
+                    <td colspan="" >
+                        <select name="leader-gender" lay-verify="required" lay-ignore>
+                            <option value=""></option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>身份证
+                    </td>
+                    <td colspan="" >
+                        <input type="text" name="leader-idcode" name="leader-idcode" lay-verify="identity" autocomplete="off" class="zp-input"
+                               placeholder="请输入身份证号">
+                    </td>
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>出生年月日
+                    </td>
+                    <td colspan="" >
+                        <input type="text" name="leader-birthday" name="leader-birthday"  lay-verify="required" autocomplete="off" class="zp-input lay-Date"
+                               placeholder="请选择日期">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>学位
+                    </td>
+                    <td colspan="" >
+                        <!-- 学位下拉框 -->
+                        <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                            <select name="leader-degree" name="leader-degree" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#  layui.each(d.data.degree, function(index, item){  }}
+                                <option value="{{ item }}">{{ item }}</option>
+                                {{#  }); }}
+                            </select>
+                        </script>
+
+
+                    </td>
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>学历
+                    </td>
+                    <td colspan="" >
+                        <!-- 学历下拉框 -->
+                        <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                            <select name="leader-xueli" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#  layui.each(d.data.xueli, function(index, item){ }}
+                                <option>
+                                    {{ item }}
+                                </option>
+                                {{#  }); }}
+                            </select>
+                        </script>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>职称
+                    </td>
+                    <td colspan="" >
+                        <!-- 职称下拉框 -->
+                        <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                            <select name="leader-title" lay-verify="required" lay-ignore>
+                                <option value="" ></option>
+                                {{#  layui.each(d.data.title, function(index, item){ }}
+                                <option>
+                                    {{ item }}
+                                </option>
+                                {{#  }); }}
+                            </select>
+                        </script>
+
+                    </td>
+
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>邮箱
+                    </td>
+                    <td colspan="" >
+                        <input type="text" name="leader-email" lay-verify="email" autocomplete="off" class="zp-input"
+                               placeholder="请输入邮箱" >
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="" class="zp-bfinput">
+                        <span style="color: rgb(219, 83, 49);">*</span>联系电话（手机）
+                    </td>
+                    <td colspan="" >
+                        <input type="tel" name="leader-phone" lay-verify="required|phone" autocomplete="off" class="zp-input"
+                               placeholder="请输入联系电话" >
+                    </td>
+
+                </tr>
+
+            </table>
+
+
+
+            <!--牵头承担单位信息-->
+            <div class="zp-title">
+                <strong>【申请单位信息】 </strong>
+            </div>
+            <table class="zp-table" id="head" style="text-align: center;  width: 100%; ">
+                <tr>
+                    <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>单位所在地</td>
+                    <td colspan="2">
+                        <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                            <select name="head-district" name="head-type" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{#
+                                layui.each(d.data.head_area, function(index, item){
+                                }}
+
+                                <option value="{{ item.code }}">{{ item.name }}</option>
+
+                                {{# }); }}
+                            </select>
+
+                        </script>
+                    </td>
+                    <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>主管部门</td>
+                    <td colspan="2">
+                        <input autocomplete="off" type="text" lay-verify="required" class="zp-input" name="head-supervisor">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>法人代表</td>
+                    <td colspan="2"><input autocomplete="off" type="text" lay-verify="required" class="zp-input" name="head-representative" ></td>
+                    <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>组织机构代码</td>
+                    <td colspan="2"><input autocomplete="off" type="text" lay-verify="required" class="zp-input" name="head-org_code"></td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>通讯地址</td>
+                    <td colspan="2"><input autocomplete="off" type="text" lay-verify="required" class="zp-input" name="head-address"></td>
+                    <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>邮   编</td>
+                    <td colspan="2"><input autocomplete="off" type="number" lay-verify="zip_code|required" class="zp-input" name="head-postcode"></td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>单位类别</td>
+                    <td colspan="2">
+                        <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                            <select name="head-type" name="head-type" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                {{# layui.each(d.data.head_type, function(index, item){ }}
+
+                                <option value="{{ item }}">{{ item }}</option>
+
+                                {{# }); }}
+                            </select>
+
+                        </script>
+
+                    </td>
+                    <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>是否为高新技术企业</td>
+                    <td colspan="2">
+                        <select name="head-high_tech" lay-verify="required" lay-ignore>
+                            <option value=""></option>
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+
+
+
+            <!--项目实施情况-->
+            <table class="zp-table" style="width: 100%;">
+
+                <tr class="zp-title">
+                    <td>
+                        <strong> 【项目实施情况（其中软科学研究项目，指研究报告、政策建议、论文与专著等）】</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7" class="" style="margin: 30px; text-align: left">
+                        <label class="label">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>(1)项目创新点（不超过500字）</strong>
+                        </label>
+                        <textarea name="p-innovation" id="innovation" placeholder="请输入项目创新点" class="" lay-verify="text500|required"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="7" class="" style="text-align:left">
+                        <label class="label">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>(2)技术创新指标（不超过300字）</strong>
+                        </label>
+                        <textarea name="p-innovation_index" id="innovation-index" placeholder="请输入技术创新指标" class="" lay-verify="text300|required" ></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="7" class="" style="text-align:left">
+                        <label class="label">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>(3)预期经济、社会、生态效益（不超过500字）</strong>
+                        </label>
+                        <textarea name="p-benefit" placeholder="请输入经济社会效益"  lay-verify="text500|required"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="7" class="" style="text-align:left">
+                        <label class="label">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>(4)预期人才培养、制度建设、对外交流合作等指标（不超过300字）</strong>
+                        </label>
+                        <textarea name="p-strength" placeholder="请输入人才培养、知识产权、技术指标等" class="" lay-verify="text300|required" ></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="7" class="" style="text-align:left">
+                        <label class="label">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>(5)其他指标（不超过200字）</strong>
+                        </label>
+                        <textarea  name="p-other_index" placeholder="请输入其他指标（不超过200字）" class="" lay-verify="text200|required" ></textarea>
+                    </td>
+                </tr>
+
+
+            </table>
+
+
+
+            <!--多条数据渲染-->
+            <div id="view"></div>
+
+            <script id="multipleID" type="text/html">
+
+                <!--项目成员信息-->
+                <div class="zp-title">
+                    <strong>【项目成员信息】  </strong>
+                </div>
+                <table class="zp-table" style="text-align: left; " id="member">
+                    <tr class="zp-bfinput">
+                        <th style="width: 50px;">序号</th>
+                        <th style="text-align: left">
+                            <span style="color: rgb(219, 83, 49);">*</span>姓名
+                        </th>
+
+                        <th style="text-align: left">
+                            <span style="color: rgb(219, 83, 49);">*</span>身份证号
+                        </th>
+
+                        <th style="text-align: left">
+                            <span>主要贡献</span>
+                        </th>
+                        <th >
+                            <span>操作</span>
+                        </th>
+                    </tr>
+
+
+                    {{# layui.each(d.member, function (index, item) { }}
+
+
+                    <tr>
+                        <th style="text-align: center">
+                            <span>1</span>
+                        </th>
+                        <th>    <span style="display: none;">{{item.id}}</span>
+                            <input type="text" id="member-name0" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="zp-input" value="{{item.name}}">
+                        </th>
+
+                        <th>
+                            <input type="number" id="member-idcode0" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="zp-input" value="{{item.idcode}}">
+                        </th>
+
+                        <th>
+                            <input type="text" id="member-contribution0" lay-verify="required" placeholder="请输入18位统一社会信用代码（可不填）" autocomplete="off"
+                                   class="zp-input" value="{{item.contribution}}">
+                        </th>
+                        <th style="text-align: center;">
+                            <button class='btn btn-delete member-del' type='button'>
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                    {{#  }); }}
+
+
+                </table>
+                <button type="button" class="btn-dashed" id="member-add">新增一行</button>
+
+
+
+                <!--合作单位信息-->
+                <div class="zp-title">
+                    <strong>【合作单位信息】  </strong>
+                </div>
+                <table class="zp-table" style="text-align: left; " id="cooperation">
+                    <tr class="zp-bfinput">
+                        <th style="width: 50px;">序号</th>
+                        <th style="text-align: left">
+                            <span style="color: rgb(219, 83, 49);">*</span>单位名称
+                        </th>
+
+                        <th style="text-align: left">
+                            <span style="color: rgb(219, 83, 49);">*</span>单位性质
+                        </th>
+
+                        <th style="text-align: left">
+                            <span>统一社会信用码</span>
+                        </th>
+                        <th >
+                            <span>操作</span>
+                        </th>
+                    </tr>
+
+                    {{# layui.each(d.cooperation, function (index, item) { }}
+                    <tr>
+                        <th style="text-align: center">
+                            <span>1</span>
+
+                        </th>
+                        <th>    <span style="display: none;">{{item.id}}</span>
+                            <input type="text" id="cooperation-name0" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="zp-input" value="{{item.name}}">
+                        </th>
+
+                        <th>
+                            <input type="text" id="cooperation-type0" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="zp-input" value="{{item.type}}">
+                        </th>
+
+                        <th>
+                            <input type="text" id="cooperation-org_code0" lay-verify="org_code1" placeholder="请输入18位统一社会信用代码（可不填）" autocomplete="off"
+                                   class="zp-input" value="{{item.org_code}}">
+                        </th>
+                        <th style="text-align: center;">
+                            <button class='btn btn-delete cooperation-del' type='button'>
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                    {{#  }); }}
+
+                </table>
+                <button type="button" class="btn-dashed" id="cooperation-add">新增一行</button>
+
+
+
+
+                <!--项目主要参与人员-->
+                <div class="zp-title">
+                    <strong>【项目主要参与人员信息】  </strong>
+                </div>
+                <table class="zp-table" id="participate" style="text-align: center; ">
+
+                    <tr class="zp-bfinput">
+                        <th style="width: 50px;">序号</th>
+
+                        <th style="width: 100px;">姓名</th>
+
+                        <th style="width: 80px;">性别</th>
+
+                        <th style="width: 100px;">年龄</th>
+
+                        <th style="width: 100px;">职称</th>
+
+                        <th>身份证号</th>
+
+                        <th>所属单位</th>
+
+                        <th>操作</th>
+                    </tr>
+
+
+                    {{# layui.each(d.participate, function (index, item) { }}
+                    <tr>
+                        <th>
+                            <span>1</span><span style="display: none;">{{item.id}}</span>
+
+                        </th>
+                        <th>    <span style="display: none;">{{item.id}}</span>
+                            <input type="text" id="participate-name0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" value="{{item.name}}">
+                        </th>
+
+                        <th>
+                            <select id="participate-gender0" lay-verify="required" lay-ignore>
+                                <option value="{{item.gender}}">{{item.gender}}</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </th>
+
+                        <th>
+                            <input type="number" id="participate-age0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" value="{{item.age}}">
+                        </th>
+
+                        <th>
+                            <select id="participate-title0" lay-verify="required" lay-ignore>
+                                <option value="{{item.title}}">{{item.title}}</option>
+                                <option value="初级">初级</option>
+                                <option value="中级">中级</option>
+                                <option value="副高">副高</option>
+                                <option value="高级">高级</option>
+                            </select>
+                        </th>
+                        <th>
+                            <input type="text" id="participate-idcode0" placeholder="请输入" autocomplete="off" lay-verify="identity"
+                                   class="zp-input" value="{{item.idcode}}">
+                        </th>
+                        <th>
+                            <input type="text" id="participate-firmName0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" value="{{item.firmName}}">
+                        </th>
+                        <th>
+                            <button class="btn btn-delete participate-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                    {{#  }); }}
+
+                </table>
+
+                <button type="button" class="btn-dashed" id="participate-add">新增一行</button>
+
+            </script>
+
+            <div class="" style="text-align: center;">
+
+                <button class="button" lay-submit lay-filter="common_save" >暂存</button>
+
+            </div>
+
+
+
+            <div id="fileUpload" >
+                <div class="zp-title"><strong>【上传附件】</strong></div>
+                <div style="background-color: #F2F2F2;">
+                    <strong>提示:</strong>
+                    <span style="color: red">
+                文件名xx.xx，建议不要使用类似xx.xx.xx的格式，
+                单个附件一定不能超过20MB,
+                多个文件请尽量压缩后再上传！
+                </span>
+                </div>
+
+
+                <div class="wrapper">
+                    <div style="padding: 20px" >
+                        <strong data-tooltip="这是之前已经上传过的文件" title="123">↓ 已上传文件 ↓</strong>
+                        <div class="layui-upload-list" >
+                            <table class="layui-table" >
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="demoList"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="" class="layui-upload" style="padding: 20px;margin-top: -30px;" >
+                    <div id="upload" >
+                        <strong data-tooltip="选择你想上传的新文件">↓ 新上传文件 ↓</strong>
+                        <form class="layui-form" method="post" enctype="multipart/form-data">
+
+                            <input type="hidden" name="key"  >
+                            <input type="hidden" name="token"   >
+
+                            <table class="layui-table" >
+                                <thead>
+                                <tr style="border: 1px solid #000;" data-tooltip="新上传文件">
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="list"></tbody>
+                            </table>
+                            <input type="file"  style="width: 75px" name="file"  id="qnfile" >
+                            <button type="button"  class="layui-btn" id="qnsubmit"><i class="layui-icon">&#xe67c;</i>上传</button>
+                        </form>
+                    </div>
+
+
+                    <p style="margin-top: 30px">
+                    <blockquote class="layui-elem-quote">
+                        提交前请确认需上传的文件<span style="color:#F22;">是否已上传</span>，暂存后可以修改，一旦提交需退回才可修改
+                    </blockquote>
+                    </p>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+        </form>
+
+
+
+    </div>
+</div>
+
+
+<script>
+    layui.use([
+        'apply_global',
+        'getProjectData',
+        'modifyPageFile',
+        "render",
+        "render_modify",
+        "render_multiple",
+        "addTr",
+        "deleteTr",
+        "fileUpload",
+        "verify",
+        "save_data",
+        "submit"
+    ], function(){
+
+        let $ = layui.$;
+        let admin = layui.admin;
+        let getProjectData = layui.getProjectData;
+        getProjectData.getData();
+
+        let modifyPageFile = layui.modifyPageFile;
+        modifyPageFile.Render();
+
+        let render = layui.render;
+        render.Render();
+
+        let fileUpload = layui.fileUpload;
+        fileUpload.Render();
+
+        let submit = layui.submit;
+        submit.Render();
+
+    })
+
+
+</script>
+
+
+
+

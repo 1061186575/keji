@@ -1,0 +1,165 @@
+<!--
+
+	@Name: 设置个人信息 设置公司信息
+	@Author: 科技组宋雄斌
+	@Date: 2019/05/11
+
+-->
+<script type="text/html" template>
+    <style type="text/css">
+        .layui-form-label {
+            text-align: center;
+        }
+
+        #temp-layui-card-body label {
+            width: 140px;
+        }
+    </style>
+</script>
+
+<title>设置公司信息</title>
+
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">平台说明</a>
+        <a><cite>个人资料</cite></a>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">设置公司信息</div>
+                <div class="layui-card-body">
+                    <form class="layui-form layui-form-pane" lay-filter="company">
+                        <div class="layui-form-item">
+                            <input type="hidden" name="id" />
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">公司名称</label>
+                            <div class="layui-input-inline">
+                                <input
+                                        type="text"
+                                        name="name"
+                                        class="layui-input"
+                                />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">不超过80个字</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">单位所在地</label>
+                            <div class="layui-input-inline">
+                                <script type="text/html" template lay-done="layui.data.done()"
+                                        lay-url="./json/user/district.json?v={{layui.admin.v}}"
+                                >
+                                    <select name="district" id="address">
+                                        <option value=""></option>
+                                        {{#layui.each(d.data, function(index, item){ }}
+                                        <option value="{{item.district1}}">{{item.area}}</option>
+                                        {{# }); }}
+                                    </select>
+                                </script>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">主管部门</label>
+                            <div class="layui-input-inline">
+                                <input
+                                        type="text"
+                                        name="supervisor"
+                                        class="layui-input"
+                                />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">法人代表</label>
+                            <div class="layui-input-inline">
+                                <input
+                                        type="text"
+                                        name="representative"
+                                        class="layui-input"
+                                />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">不超过80个字</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">社会信用码</label>
+                            <div class="layui-input-inline">
+                                <input
+                                        type="text"
+                                        name="org_code"
+                                        maxlength="18"
+                                        class="layui-input"
+                                />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">通讯地址</label>
+                            <div class="layui-input-inline">
+                                <input
+                                        type="text"
+                                        name="address"
+                                        class="layui-input"
+                                />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">邮政编码</label>
+                            <div class="layui-input-inline">
+                                <input
+                                        type="text"
+                                        name="postcode"
+                                        maxlength="6"
+                                        class="layui-input"
+                                />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">请输入有效的邮政编码</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">单位类别</label>
+                            <div class="layui-input-inline">
+                                <select name="type">
+                                    <option value=""></option>
+                                    <option value="大专院校">大专院校</option>
+                                    <option value="大专院校">大专院校</option>
+                                    <option value="科研院所">科研院所</option>
+                                    <option value="政府部门">政府部门</option>
+                                    <option value="事业单位">事业单位</option>
+                                    <option value="国有企业">国有企业</option>
+                                    <option value="民营企业">民营企业</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">高新技术企业</label>
+                            <div class="layui-input-inline">
+                                <select name="high_tech">
+                                    <option value=""></option>
+                                    <option value="是">是</option>
+                                    <option value="否">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button
+                                        class="layui-btn layui-bg-blue"
+                                        type="button"
+                                        lay-submit
+                                        lay-filter="setcompanyinfo"
+                                >
+                                    确认修改
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

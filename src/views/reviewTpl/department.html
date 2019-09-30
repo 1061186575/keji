@@ -1,0 +1,126 @@
+<!--
+
+    /**
+     * @author 周鹏
+     * @最后修改日期 2019-05-11 7/24
+     */
+
+-->
+
+<div id='first-review' style="margin-top: 20px">
+    <div>
+        <textarea class='layui-textarea' id='textarea-text' maxlength='120' placeholder="请填写理由"
+                  style='height: 90%;margin: 10px 0;'></textarea>
+    </div>
+
+    <div id="show-textarea" style='width: 100%; display: block;margin: 20px 0'>
+        <a class='layui-btn' lay-filter='success-result' lay-submit>初审通过</a>
+        <a class='layui-btn layui-btn-danger' lay-filter='fail-result' lay-submit>初审不通过</a>
+    </div>
+
+</div>
+
+<script>
+    layui.use(["form", "layer"], function () {
+        let $ = layui.$;
+        let setter = layui.setter;
+        let form = layui.form;
+        let admin = layui.admin;
+        let layer = layui.layer;
+
+        /**
+         * case "已受理": // department
+         case "再次受理":
+         */
+
+        let projectId = layui.data(setter.tableName).projectId;
+        let userId = layui.data(setter.tableName).userId;
+        let text = null; // 提示用户的文本信息
+        let suc_fail_or_return = null; // 判断选择的是同意还是不同意还是退回
+        let proStatus = {}; //状态码
+        let current = null;
+        let Url = "/mytio/user/proStatus/departmentUpdate";
+
+
+        admin.req({
+            url: "/mytio/user/proStatus/CurrentStatus?projectId=" + projectId,
+            type: "get",
+            dataType: "json",
+            async: false,
+            contentType: "application/json",
+            success: function (res) {
+                console.log("状态码: ", res);
+                proStatus = res;
+            }
+        });
+
+        // 发送success或者fail或者return的理由
+        function sendText() {
+            let content = $("#textarea-text").val();
+            layer.confirm(`确定${text}此项目?`, function (index) {
+                console.log("suc_fail_or_return", suc_fail_or_return);
+
+                if (suc_fail_or_return === "success") {
+
+                    switch (proStatus.data) {
+                        case "已受理":
+                        case "再次受理":
+                            current = 7;
+                            break;
+                    }
+                    Url = `${Url}?projectId=${projectId}&current=${current}&supervisorMeno=${content}&userId=${userId}`;
+                    sendAjax(Url);
+                }
+
+                if (suc_fail_or_return === "fail") {
+
+                    switch (proStatus.data) {
+                        case "已受理":
+                        case "再次受理":
+                            current = 103;
+                            break;
+                        default:
+                            layer.alert("项目状态码有问题");
+                    }
+                    Url = `${Url}?projectId=${projectId}&current=${current}&supervisorMeno=${content}&userId=${userId}`;
+                    sendAjax(Url);
+                }
+                layer.close(index);
+            });
+        }
+
+
+        form.on("submit(success-result)", function (data) {
+            text = data.elem.innerText;
+            suc_fail_or_return = "success";
+            sendText();
+        });
+
+        form.on("submit(fail-result)", function (data) {
+            text = `${data.elem.innerText}`;
+            suc_fail_or_return = "fail";
+            sendText();
+        });
+
+        // 发送Ajax
+        function sendAjax(url, data) {
+            admin.req({
+                url: url,
+                type: "post",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    layer.alert("操作成功", function () {
+                        layui.index.render();
+                    });
+                },
+                error(e) {
+                    layer.alert("操作失败");
+                }
+            });
+        }
+
+
+    });
+</script>

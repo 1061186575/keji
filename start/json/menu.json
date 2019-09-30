@@ -1,0 +1,72 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "name": "index",
+      "title": "平台说明",
+      "icon": "layui-icon-home",
+      "jump": "/"
+    },
+    {
+      "name": "personData",
+      "title": "个人资料",
+      "icon": "layui-icon-friends",
+      "jump": "/user/set/setPersonData"
+    },
+    {
+      "name": "firmData",
+      "title": "公司资料",
+      "icon": "layui-icon-group",
+      "jump": "/user/set/setFirmData"
+    },
+    {
+      "name": "modifyPassword",
+      "title": "修改密码",
+      "icon": "layui-icon-password",
+      "jump": "/user/set/modifyPassword"
+    },
+    {
+      "name": "applyProject",
+      "title": "项目申报",
+      "icon": "layui-icon-add-1",
+      "jump": "/user/user/applyProject"
+    },
+    {
+      "name": "checkProject",
+      "title": "我的项目",
+      "icon": "layui-icon-face-smile",
+      "jump": "/user/user/checkProject"
+    },
+    {
+      "name": "checkUnsubmitProject",
+      "title": "未提交项目",
+      "icon": "layui-icon-template",
+      "jump": "/user/user/checkUnsubmitProject"
+    },
+    {
+      "name": "checkReturnProject",
+      "title": "已退回项目",
+      "icon": "layui-icon-face-surprised",
+      "jump": "/user/user/checkReturnProject"
+    },
+    {
+      "name": "checkAbolishProject",
+      "title": "已废止项目",
+      "icon": "layui-icon-face-cry",
+      "jump": "/user/user/checkAbolishProject"
+    },
+    {
+      "name": "fileDownload",
+      "title": "文件下载",
+      "icon": "layui-icon-download-circle",
+      "jump": "/download/fileDownload"
+    },
+    {
+      "name": "fileDownload",
+      "title": "test",
+      "icon": "layui-icon-download-circle",
+      "jump": "/user/test/wordDL"
+    }
+  ]
+}

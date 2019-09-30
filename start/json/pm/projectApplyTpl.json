@@ -1,0 +1,51 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "title": "科技重大专项项目申报",
+      "id": "apply-major",
+      "content": "projectTpl/apply/major"
+    },
+    {
+      "title": "重点研发计划项目申报",
+      "id": "apply-point",
+      "content": "projectTpl/apply/point"
+    },
+    {
+      "title": "技术创新引导专项项目申报",
+      "id": "apply-common1",
+      "content": "projectTpl/apply/common1"
+    },
+    {
+      "title": "科技型企业创新创业扶持资金项目申报",
+      "id": "apply-innovation",
+      "content": "projectTpl/apply/innovation"
+    },
+    {
+      "title": "基础研究计划项目申报",
+      "id": "apply-common2",
+      "content": "projectTpl/apply/common"
+    },
+    {
+      "title": "重点实验室项目申报",
+      "id": "apply-research",
+      "content": "projectTpl/apply/research"
+    },
+    {
+      "title": "工程技术研究中心项目申报",
+      "id": "apply-engineer",
+      "content": "projectTpl/apply/engineer"
+    },
+    {
+      "title": "院士工作站项目申报",
+      "id": "apply-workstation",
+      "content": "projectTpl/apply/workstation"
+    },
+    {
+      "title": "科技企业孵化器项目申报",
+      "id": "apply-workstation",
+      "content": "projectTpl/apply/incubator"
+    }
+  ]
+}

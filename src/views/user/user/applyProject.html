@@ -1,0 +1,55 @@
+<!--
+	@Name：项目申报类别选择
+	@Author：科技组宋雄斌
+	@Date: 2019/07/19
+-->
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">平台说明</a>
+        <a><cite>项目申报</cite></a>
+    </div>
+</div>
+
+<script template type="text/html">
+    <style>
+        .div_show {
+            margin: 50px auto;
+            width: 400px;
+        }
+
+        .form-btn {
+            margin-top: 20px;
+            margin-left: 150px;
+        }
+
+        .p-alert {
+            margin-top: 150px;
+            color: red;
+            font-size: 25px;
+            text-align: center;
+        }
+    </style>
+</script>
+<script lay-done="layui.data.applyProjectFun()" lay-url="./json/pm/category.json?v={{ layui.admin.v }}-1" template
+        type="text/html">
+    <p class="p-alert">请选择您需要申报的项目类别为：</p>
+    <div class="div_show">
+        <form class="layui-form" layui-filter="project-class-form">
+            <div class="layui-form-item div_top">
+                <label class="layui-form-label">项目类别</label>
+                <div class="layui-input-inline">
+                    <select name="classname">
+                        <option value=""></option>
+                        {{# layui.each(d.data, function(index, item){ }}
+                        <option value="{{ item.mainid }}">{{ item.classname }}</option>
+                        {{# }); }}
+                    </select>
+                </div>
+            </div>
+            <button class="layui-btn layui-btn-normal form-btn" lay-submit lay-filter="apply"
+                    data-type="applyProjectFn">项目申报
+            </button>
+        </form>
+    </div>
+</script>
+

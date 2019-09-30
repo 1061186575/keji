@@ -1,0 +1,26 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "role": "推荐单位",
+      "id": "recommend",
+      "content": "reviewTpl/recommend"
+    },
+    {
+      "role": "受理中心",
+      "id": "accept",
+      "content": "reviewTpl/accept"
+    },
+    {
+      "role": "主管科室",
+      "id": "department",
+      "content": "reviewTpl/department"
+    },
+    {
+      "role": "计划科",
+      "id": "planningSection",
+      "content": "reviewTpl/planningSection"
+    }
+  ]
+}

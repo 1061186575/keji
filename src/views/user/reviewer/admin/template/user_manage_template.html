@@ -1,0 +1,92 @@
+<!-- 添加用户和修改用户模板 -->
+<!-- 添加下拉框 -->
+<form class="layui-form">
+  <script
+    template
+    type="text/html"
+    lay-url="json/test/user_manage_modify.js"
+    lay-done="layui.data.user_manage_template()"
+  >
+    <input type="hidden" value="{{d.params.id}}"  name="id">
+    <!-- 用flag来标志是修改还是添加 -->
+    <input type="hidden" name="flag" id="flag" value="{{d.params.flag}}">
+    <div class="layui-form-item">
+      <label class="layui-form-label">角色</label>
+      <div class="layui-input-inline">
+        <select name="roleId" lay-verify="required" class="erole" lay-filter="select">
+          <option value="{{d.params.roleId}}">{{d.params.roles}}</option>
+          {{# layui.each(d.data.roles, function(index, item){ }}
+          <option value="{{ item.id }}">{{ item.name }}</option>
+          {{# }); }}
+        </select>
+      </div>
+    </div>
+    <div id="content"></div>
+    <div id="view" hidden>
+      <div class="layui-form-item">
+        <label class="layui-form-label">所属科室</label>
+        <div class="layui-input-inline">
+          <select id="department" class="js-department">
+            <option value="{{d.params.department_id || ''}}">{{d.params.department || ""}}</option>
+            {{# layui.each(d.data.dep, function(index, item){ }}
+            <option value="{{ item.id }}">{{ item.name }}</option>
+            {{# }); }}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </script>
+
+  <script type="text/html" template>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">姓名</label>
+      <div class="layui-input-inline">
+        <input type="text" name="name" maxlength="15" lay-verify="required" autocomplete="off"
+               class="layui-input" placeholder="姓名" value="{{d.params.name}}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">电话</label>
+      <div class="layui-input-inline">
+        <input type="text" lay-verify="phone" name="phone" autocomplete="off" class="layui-input"
+               placeholder="请输入电话" maxlength="11" value="{{d.params.phone}}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">电子邮箱</label>
+      <div class="layui-input-inline">
+        <input type="text" lay-verify="email" name="email" required placeholder="请输入邮箱" autocomplete="off"
+               class="layui-input" list="datalist" value="{{d.params.email}}">
+        <datalist id="datalist"></datalist>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">用户名</label>
+      <div class="layui-input-inline">
+        <input type="text" name="username" lay-verify="required" placeholder="请输入用户名" autocomplete="off"
+               lay-verfiy="required"
+               class="layui-input" value="{{d.params.username}}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">密码</label>
+      <div class="layui-input-inline">
+        <input type="text" name="passwd" lay-verify="pass|must" maxlength="12" placeholder="请输入密码" autocomplete="off"
+               class="layui-input">
+      </div>
+    </div>
+
+    <hr class="layui-bg-black">
+    <div>
+      <footer style="text-align: center;">
+        <button class="layui-btn" lay-submit lay-filter="createMember">提交</button>
+      </footer>
+    </div>
+  </script>
+</form>
+
+

@@ -1,0 +1,51 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "title": "科技重大专项项目查看",
+      "id": "check-major",
+      "content": "projectTpl/check/major"
+    },
+    {
+      "title": "重点研发计划项目查看",
+      "id": "check-point",
+      "content": "projectTpl/check/point"
+    },
+    {
+      "title": "技术创新引导专项项目查看",
+      "id": "check-common1",
+      "content": "projectTpl/check/common1"
+    },
+    {
+      "title": "科技型企业创新创业扶持资金项目查看",
+      "id": "check-innovation",
+      "content": "projectTpl/check/innovation"
+    },
+    {
+      "title": "基础研究计划项目查看",
+      "id": "check-common2",
+      "content": "projectTpl/check/common"
+    },
+    {
+      "title": "重点实验室项目查看",
+      "id": "check-research",
+      "content": "projectTpl/check/research"
+    },
+    {
+      "title": "工程技术研究中心项目查看",
+      "id": "check-engineer",
+      "content": "projectTpl/check/engineer"
+    },
+    {
+      "title": "院士工作站项目查看",
+      "id": "check-workstation",
+      "content": "projectTpl/check/workstation"
+    },
+    {
+      "title": "科技企业孵化器项目申报",
+      "id": "apply-workstation",
+      "content": "projectTpl/check/incubator"
+    }
+  ]
+}

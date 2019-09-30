@@ -1,0 +1,128 @@
+<script src="./frame/crypto-js.js"></script>
+
+<script type="text/html" template>
+  <link rel="stylesheet" href="{{layui.setter.base}}/style/login.css">
+</script>
+
+<div class="prompt_main">
+  <div class="zbrowser">
+    <div class="zbrowser_box">
+      <p class="zbrowser_txt">
+        &nbsp;&nbsp;&nbsp;&nbsp;温馨提示：为了保障系统正常运行，请使用
+        <a
+                class="layui-btn layui-btn-normal"
+                href="https://browser.qq.com/"
+                target="_blank"
+        >QQ浏览器</a
+        >
+        <a
+                class="layui-btn layui-btn-normal"
+                href="https://www.firefox.com.cn/download/"
+                target="_blank"
+        >火狐浏览器</a
+        >遇到问题请联系QQ:742946635, 1336378818 手机: 17873003897
+      </p>
+      <script type="text/html" template>
+        <a class="layui-btn layui-btn-lg layui-bg-cyan" style="float: right;" href="{{layui.setter.base}}/word/调查问卷.doc" download="调查问卷.doc">提交宝贵意见</a>
+        <a class="layui-btn layui-btn-lg layui-btn-warm"
+           href="{{layui.setter.base}}/word/manual.pdf"
+           style="float: right;">点击下载用户手册</a>
+      </script>
+
+    </div>
+  </div>
+</div>
+
+<div class="layadmin-user-login layadmin-user-display-show main">
+  <div class="div_background_image">
+    <div class="layadmin-user-login-main show_body">
+      <div class="layui-tab" lay-filter="login">
+        <div class="layui-tab-content">
+          <div class="layui-tab-item layui-show">
+            <form
+                    class="layadmin-user-login-box layadmin-user-login-body layui-form"
+                    id="user-form"
+            >
+              <div class="layui-form-item">
+                <label
+                        class="layadmin-user-login-icon layui-icon layui-icon-username"
+                        for="LAY-user-login-username"
+                ></label>
+                <input
+                        type="text"
+                        name="username"
+                        autocomplete="off"
+                        lay-verify="required"
+                        placeholder="用户名"
+                        class="layui-input"
+                />
+              </div>
+
+              <div class="layui-form-item">
+                <label
+                        class="layadmin-user-login-icon layui-icon layui-icon-password"
+                        for="LAY-user-login-password"
+                ></label>
+                <input
+                        type="password"
+                        name="passwd"
+                        lay-verify="required"
+                        placeholder="密码"
+                        class="layui-input"
+                />
+              </div>
+
+              <div class="layui-form-item">
+                <button
+                        class="layui-btn layui-btn-fluid button_style"
+                        lay-submit
+                        lay-filter="login"
+                        type="button"
+                >
+                  登录
+                </button>
+              </div>
+              <div class="layui-form-item div_tips">
+                <a
+                        lay-href="/user/reg"
+                        class="layadmin-user-jump-change layadmin-link"
+                >注册帐号</a
+                >
+<!--                <a-->
+<!--                        lay-href="/user/forget"-->
+<!--                        class="layadmin-user-jump-change layadmin-link"-->
+<!--                >忘记密码？</a-->
+<!--                >-->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="div-footer layadmin-user-login-footer">
+      <p>CopyRight©岳阳市科技局版权所有</p>
+    </div>
+  </div>
+</div>
+
+<div hidden id="keyCode">
+  <form class="layui-form" style="padding-top: 20px;">
+    <div class="layui-form-item">
+      <label class="layui-form-label">验证码:</label>
+      <div class="layui-input-inline">
+        <input
+                type="text"
+                name="code"
+                lay-verify="required"
+                autocomplete="off"
+                placeholder="请输入验证码"
+                class="layui-input"
+        />
+      </div>
+    </div>
+    <div style="text-align: center;padding-top: 10px;">
+      <button class="layui-btn" lay-submit lay-filter="codeSubmit">提交</button>
+    </div>
+  </form>
+</div>
+

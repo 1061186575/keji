@@ -1,0 +1,29 @@
+<title>未提交项目</title>
+
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">平台说明</a>
+        <a><cite>未提交项目</cite></a>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">未提交项目</div>
+                <div class="layui-card-body">
+                    <table id="unsubmitted-project" lay-filter="unsubmitted-project"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="table_bar" type="text/html">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="check">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="modify">修改</a>
+    <a class="layui-btn layui-btn-xs" lay-event="submit">提交</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+

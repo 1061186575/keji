@@ -1,0 +1,111 @@
+<script type="text/html" template lay-done="layui.data.forget()">
+  <style>
+    .code {
+      background: darkgray;
+      font-family: Arial;
+      font-style: italic;
+      color: blue;
+      font-size: 30px;
+      border: 0;
+      padding: 2px 3px;
+      letter-spacing: 3px;
+      font-weight: bolder;
+      float: left;
+      cursor: pointer;
+      width: 128px;
+      height: 34px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .show-main {
+      background-image: url("../src/style/res/login/login.jpg");
+      background-repeat: no-repeat;
+      -webkit-background-size: 100% 100%;
+      background-size: 100% 100%;
+    }
+
+    .div_verify {
+      margin-left: 10px;
+      margin-top: 3px;
+    }
+
+    .div-btn {
+      width: 335px;
+    }
+
+    .span_title {
+      font-size: 35px;
+      font-family: "宋体";
+      color: black;
+    }
+  </style>
+  <link rel="stylesheet" href="{{layui.setter.base}}/style/login.css">
+</script>
+<div
+        class="layadmin-user-login layadmin-user-display-show show-main"
+        id="LAY-user-login"
+>
+  <div class="layadmin-user-login-main">
+    <div class="layadmin-user-login-box layadmin-user-login-header">
+      <span class="span_title">找回密码</span>
+      <p>请填写您需要找回的帐号</p>
+    </div>
+    <form class="layadmin-user-login-box layadmin-user-login-body layui-form">
+      <div class="layui-form-item">
+        <label
+                class="layadmin-user-login-icon layui-icon layui-icon-username"
+                for="LAY-user-login-userName"
+        ></label>
+        <input
+                type="text"
+                name="userName"
+                id="LAY-user-login-userName"
+                lay-verify="required"
+                placeholder="请输入用户名"
+                class="layui-input"
+                autocomplete="off"
+        />
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-row">
+          <div class="layui-col-xs7">
+            <label
+                    class="layadmin-user-login-icon layui-icon layui-icon-vercode"
+                    for="LAY-user-login-vercode"
+            ></label>
+            <input
+                    type="text"
+                    name="verCode"
+                    id="LAY-user-login-vercode"
+                    lay-verify="required"
+                    placeholder="图形验证码"
+                    class="layui-input"
+                    autocomplete="off"
+            />
+          </div>
+          <div class="layui-col-xs5">
+            <div class="div_verify">
+              <div class="code" id="checkCode" onclick="createCode()"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="div-btn">
+        <button
+                class="layui-btn layui-btn-fluid"
+                type="button"
+                lay-submit
+                lay-filter="LAY-user-forget-submit"
+        >
+          找回密码
+        </button>
+      </div>
+    </form>
+  </div>
+
+<!--  <div class="layui-trans layadmin-user-login-footer">-->
+<!--    <p>© <a href="javascript:;" target="_blank">科技局所有...</a></p>-->
+<!--  </div>-->
+</div>
+

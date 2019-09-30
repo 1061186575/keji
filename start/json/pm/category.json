@@ -1,0 +1,42 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "classname": "科技重大专项",
+      "mainid": 1
+    },
+    {
+      "classname": "重点研发计划",
+      "mainid": 2
+    },
+    {
+      "classname": "技术创新引导专项",
+      "mainid": 3
+    },
+    {
+      "classname": "创新平台与人才专项",
+      "mainid": 4
+    },
+    {
+      "classname": "基础研究计划",
+      "mainid": 5
+    },
+    {
+      "classname": "重点实验室",
+      "mainid": 6
+    },
+    {
+      "classname": "工程技术研究中心",
+      "mainid": 7
+    },
+    {
+      "classname": "院士工作站",
+      "mainid": 8
+    },
+    {
+      "classname": "科技企业孵化器",
+      "mainid": 9
+    }
+  ]
+}

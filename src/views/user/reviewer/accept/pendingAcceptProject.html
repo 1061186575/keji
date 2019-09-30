@@ -1,0 +1,80 @@
+<title>待审核项目</title>
+
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">平台说明</a>
+        <a><cite>待审核项目</cite></a>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">待审核项目</div>
+                <div class="layui-card-body">
+                    <table id="pending-review-accept-table" lay-filter="pending-review-accept-table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="table_bar" type="text/html">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="check">查看</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="review">审核</a>
+</script>
+
+<script>
+    layui
+        .use('common', layui.factory('common'))
+        .use(['table', 'layer'], function () {
+            let table = layui.table;
+            let admin = layui.admin;
+            let view = layui.view;
+            let setter = layui.setter;
+            let layer = layui.layer;
+            let $ = layui.$;
+
+            let common = layui.common;
+
+            let userId = layui.data(setter.tableName).userId;
+            // 待审核项目
+            table.render({
+                elem: "#pending-review-accept-table",
+                url: "/", //数据接口
+                page: true, //开启分页
+                title: '待审核项目表',
+                request: {
+                    pageName: 'pageNumber' //页码的参数名称，默认：page
+                    , limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                },
+                parseData: common.layui_page_parseData,
+                cols: [
+                    [
+                        //表头
+                        {field: "id", title: "ID", hide: true},
+                        {type: "numbers", title: "序号", align: "center", width: 100},
+                        {field: "name", title: "项目名称", align: "center"},
+                        {field: "classname", title: "项目类别", align: "center"},
+                        {field: "userName", title: "申报人", align: "center"},
+                        {field: "firmName", title: "申报单位", align: "center"},
+                        {field: "time", title: "申报时间", align: "center"},
+                        {field: "start", title: "开始日期", align: "center"},
+                        {field: "end", title: "结束日期", align: "center"},
+                        {title: "操作", width: 120, toolbar: "#table_bar", align: "center"}
+                    ]
+                ],
+                size: 'lg',
+                limit: 10,
+                limits: [10]
+            });
+            table.on("tool(pending-review-accept-table)", function (obj) {
+                let layEvent = obj.event;
+                switch (layEvent) {
+                    case 'review': common.review(obj, '受理中心');break;
+                    case 'check': common.check(obj);break;
+                }
+            });
+        });
+</script>

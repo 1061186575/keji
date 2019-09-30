@@ -1,0 +1,1261 @@
+<!--
+
+     相对于innovation, 新增如下
+
+        子课题设置: 子课题名称	申请单位
+
+        负责人承担项目情况
+
+        项目拟购置、试制科研设备清单（单位：万元）
+-->
+
+
+<!--
+
+    /**
+     * @author 周鹏
+     * @最后修改日期 2019-05-11
+     */
+
+-->
+
+<script type="text/html" template>
+    <link rel="stylesheet" href="{{layui.setter.base}}/style/apply/apply.css">
+</script>
+
+
+
+
+<div id="all">
+    <h1>科技重大专项项目申报(申报)</h1>
+
+    <div id="app-apply" class="zp-major">
+
+
+        <div id="main">
+            <div class="zp-title">
+                <strong>
+                    【项目基本信息】
+                </strong>
+            </div>
+
+
+
+            <form class="layui-form" id="formData"  onsubmit=" return false;">
+
+
+                <table class="zp-table" id="base" style="text-align: center; width: 100%;">
+
+                    <tr>
+                        <td colspan="1" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>项目名称</strong>
+                        </td>
+                        <td colspan="6">
+                            <input type="text"  style="width: 100%;" id="project-name" name="p-name" lay-verify="names|required" autocomplete="off" class="zp-input" placeholder="请输入项目名称" >
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="1" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>计划类别</strong>
+                        </td>
+
+                        <td colspan="3">
+
+                            <!-- 计划类别下拉框 -->
+
+
+                            <script type="text/html" template lay-url="/mytio/common/getChildrenClass?classname=科技重大专项" >
+                                <select id="classname" name="p-prj_type_id" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#
+                                    layui.each(d.data, function(index, item){
+                                    }}
+
+                                    <option value="{{ item.id }}">{{ item.classname }}</option>
+
+                                    {{# }); }}
+                                </select>
+                            </script>
+
+
+                        </td>
+
+
+                        <td colspan="1" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>申请单位</strong>
+                        </td>
+
+                        <td colspan="3" class="">
+                            <input type="text" lay-verify="required" name="p-companyName" id="companyName" readonly title="不可更改" class="zp-input borderColor">
+                        </td>
+                    </tr>
+
+
+                    <tr >
+                        <td rowspan="1" class="zp-bfinput">
+
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>项目现处阶段</strong>
+
+                        </td>
+                        <td rowspan="1" colspan="3">
+                            <script type="text/html" template lay-url="/mytio/common/getStatus">
+                                <select name="p-status_description"   lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#
+                                    layui.each(d.data, function(index, item){
+                                    }}
+                                    <option value="{{ item }}">{{ item }}</option>
+                                    {{# }); }}
+                                </select>
+                            </script>
+
+
+                        </td>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>主管科室</strong>
+                        </td>
+                        <td colspan="2">
+                            <!-- 主管科室下拉框 -->
+                            <script type="text/html" template lay-url="/mytio/common/getDep">
+                                <select name="p-supervisor" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#
+                                    layui.each(d.data, function(index, item){
+                                    }}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                    {{# }); }}
+                                </select>
+                            </script>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>推荐单位</strong>
+                        </td>
+                        <td rowspan="1" colspan="3">
+                            <script type="text/html" template lay-url="/mytio/common/getRecom">
+                                <select name="p-recommend" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#
+                                    layui.each(d.data, function(index, item){
+                                    }}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                    {{# }); }}
+                                </select>
+                            </script>
+                        </td>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>技术来源</strong>
+                        </td>
+                        <td colspan="3">
+                            <!-- 技术来源下拉框 -->
+                            <script type="text/html" template lay-url="/mytio/common/getSource">
+                                <select name="p-tech_source" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#
+                                    layui.each(d.data, function(index, item){
+                                    }}
+                                    <option value="{{ item }}">{{ item }}</option>
+                                    {{# }); }}
+                                </select>
+                            </script>
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>技术领域</strong></td>
+                        <td colspan="3">
+
+                            <input type="text" name="p-tech_area" lay-verify="required" class="zp-input" autocomplete="off"  placeholder="请输入技术领域">
+                        </td>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>所属领域(学科)</strong>
+                        </td>
+                        <td colspan="2" class="">
+                            <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                                <select name="p-field" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#  layui.each(d.data.field, function(index, item){  }}
+                                    <option>{{ item }}</option>
+                                    {{#  }); }}
+                                </select>
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>开始年限</strong>
+                        </td>
+                        <td colspan="3">
+                            <input type="text" class="zp-input lay-Date" lay-verify="required" autocomplete="off" placeholder="请选择开始日期"
+                                   name="p-start"  >
+                        </td>
+                        <td colspan="1" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>依托研发平台</strong>
+                        </td>
+
+                        <td colspan="2">
+                            <!-- 依托研发平台下拉框 -->
+                            <script type="text/html" template lay-url="/mytio/common/getPlatform">
+                                <select name="p-os" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#
+                                    layui.each(d.data, function(index, item){
+                                    }}
+                                    <option value="{{ item }}">{{ item }}</option>
+                                    {{# }); }}
+                                </select>
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>结束年限</strong>
+                        </td>
+                        <td colspan="1">
+                            <input type="text" name="p-end" class="zp-input lay-Date" lay-verify="required" autocomplete="off" placeholder="请选择结束日期"
+                            >
+                        </td>
+                    </tr>
+
+                </table>
+
+
+
+                <div class="zp-title">
+                    <strong>
+                        【子课题设置】
+                    </strong>
+                </div>
+                <table style="width: 100%;">
+                    <tr>
+                        <th class="zp-bfinput" style="width: 300px;"><strong>子课题名称</strong></th>
+                        <th class="zp-bfinput"><strong>申请单位</strong></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="p-sub_project" class="zp-input" style="width: 350px;">
+                        </td>
+                        <td>
+                            <input type="text" name="p-apply_firm" class="zp-input" style="width: 600px;">
+                        </td>
+                    </tr>
+                </table>
+
+
+                <!--项目投资情况-->
+                <div class="zp-title">
+                    <strong>
+                        <span style="text-align:left"> 【项目投资情况】 </span>
+                    </strong>
+                </div>
+                <table class="zp-table" id="investment" style="width: 100%;">
+
+                    <tr>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>项目总投资</strong> <br>
+                            <span style="color: red;font-size: 0.5em;">(自动相加，不用输入) </span> <br>
+                        </td>
+                        <td>
+                            <input type="number" style="cursor: not-allowed; width: 120px; height: 30px; color: red; padding: 5px; box-sizing: border-box" name="total" autocomplete="off" class="" id="total" readonly min="0" >
+                            （万元）
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>银行贷款</strong>
+                        </td>
+                        <td>
+                            <input type="number" style="width: 120px;" name="loan" lay-verify="num|required" autocomplete="off" class="zp-input num" id="loan" min="0" >
+                            （万元）
+                        </td>
+                        <td class="zp-bfinput" style="position: relative;left: 15px"><span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>单位自筹</strong>
+                        </td>
+                        <td style="position: relative;left: 15px">
+                            <input type="number" style="width: 120px;" name="self-fund" lay-verify="num|required" autocomplete="off" class="zp-input num" id="self-fund" min="0" >
+                            （万元）
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>其他</strong>
+                        </td>
+                        <td>
+                            <input type="number" style="width: 120px;" name="other-fund" lay-verify="num|required" autocomplete="off" class="zp-input num" id="other-fund" min="0" >
+                            （万元）
+                        </td>
+                        <td class="zp-bfinput" style="position: relative;left: 15px">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>申请资金</strong>
+                        </td>
+                        <td colspan="3" style="position: relative;left: 15px">
+                            <input type="number" style="width: 120px;" name="appropriation" lay-verify="num|required" autocomplete="off" class="zp-input num" id="appropriation" min="0" >
+                            （万元）
+                        </td>
+                    </tr>
+                </table>
+
+
+                <div class="zp-title">
+                    <strong>【首席技术负责人】 <span id="skillLeader" style="display: none">skillLeader</span> </strong>
+                </div>
+                <!--项目负责人信息-->
+                <table class="zp-table leader" style="text-align: center; width: 100%;" >
+                    <tr>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>姓名
+                        </td>
+                        <td colspan="" >
+                            <input type="text" name="leader-name" lay-verify="required|name" autocomplete="off" class="zp-input" placeholder="请输入姓名" >
+                        </td>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>性别
+                        </td>
+                        <td colspan="" >
+                            <select name="leader-gender" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>身份证
+                        </td>
+                        <td colspan="" >
+                            <input type="text" name="leader-idcode" lay-verify="identity" autocomplete="off" class="zp-input"
+                                   placeholder="请输入身份证号">
+                        </td>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>出生年月日
+                        </td>
+                        <td colspan="" >
+                            <input type="text" name="leader-birthday"  lay-verify="required" autocomplete="off" class="zp-input lay-Date"
+                                   placeholder="请选择日期">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>学位
+                        </td>
+                        <td colspan="" >
+                            <!-- 学位下拉框 -->
+                            <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                                <select name="leader-degree" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#  layui.each(d.data.degree, function(index, item){  }}
+                                    <option>{{ item }}</option>
+                                    {{#  }); }}
+                                </select>
+                            </script>
+
+
+                        </td>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>学历
+                        </td>
+                        <td colspan="" >
+                            <!-- 学历下拉框 -->
+                            <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                                <select name="leader-xueli" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#  layui.each(d.data.xueli, function(index, item){ }}
+                                    <option>
+                                        {{ item }}
+                                    </option>
+                                    {{#  }); }}
+                                </select>
+                            </script>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>职称
+                        </td>
+                        <td colspan="" >
+                            <!-- 职称下拉框 -->
+                            <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                                <select name="leader-title" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#  layui.each(d.data.title, function(index, item){ }}
+                                    <option>
+                                        {{ item }}
+                                    </option>
+                                    {{#  }); }}
+                                </select>
+                            </script>
+
+                        </td>
+                        <td colspan="" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>企业职务</td>
+                        <td colspan="" >
+                            <input type="text" name="leader-position" lay-verify="required" autocomplete="off" class="zp-input"
+                                   placeholder="请输入企业职务" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>联系电话（手机）
+                        </td>
+                        <td colspan="" >
+                            <input type="tel" name="leader-phone" lay-verify="required|phone" autocomplete="off" class="zp-input"
+                                   placeholder="请输入联系电话" >
+                        </td>
+                        <td colspan="" class="zp-bfinput">
+                            <span style="color: rgb(219, 83, 49);">*</span>邮箱
+                        </td>
+                        <td colspan="" >
+                            <input type="text" name="leader-email" lay-verify="email" autocomplete="off" class="zp-input"
+                                   placeholder="请输入邮箱" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>持股比例（%）</td>
+                        <td colspan="" >
+                            <input type="text" name="leader-stock" lay-verify="required" autocomplete="off" class="zp-input"
+                                   placeholder="请输入持股比例" >
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <!--牵头承担单位信息-->
+                <div class="zp-title">
+                    <strong>【牵头承担单位信息】 </strong>
+                </div>
+                <table class="zp-table" id="head" style="text-align: center;  width: 100%; ">
+                    <tr>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>单位所在地</td>
+                        <td colspan="2">
+                            <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                                <select name="head-area" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{#
+                                    layui.each(d.data.head_area, function(index, item){
+                                    }}
+
+                                    <option value="{{ item.code }}">{{ item.name }}</option>
+
+                                    {{# }); }}
+                                </select>
+
+                            </script>
+                        </td>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>主管部门</td>
+                        <td colspan="2">
+                            <input autocomplete="off" type="text" lay-verify="required" class="zp-input" name="head-supervisor">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>法人代表</td>
+                        <td colspan="2"><input autocomplete="off" type="text" lay-verify="required" class="zp-input" name="head-representative" ></td>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>组织机构代码</td>
+                        <td colspan="2"><input autocomplete="off" type="text" lay-verify="required" class="zp-input" name="head-org_code"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>通讯地址</td>
+                        <td colspan="2"><input autocomplete="off" type="text" lay-verify="required" class="zp-input" name="head-district"></td>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>邮   编</td>
+                        <td colspan="2"><input autocomplete="off" type="number" lay-verify="zip_code|required" class="zp-input" name="head-postcode"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>单位类别</td>
+                        <td colspan="2">
+                            <script type="text/html" template lay-url="./json/apply/apply_default_json.js?v={{ layui.admin.v }}">
+                                <select name="head-type" name="head-type" lay-verify="required" lay-ignore>
+                                    <option value=""></option>
+                                    {{# layui.each(d.data.head_type, function(index, item){ }}
+
+                                    <option value="{{ item }}">{{ item }}</option>
+
+                                    {{# }); }}
+                                </select>
+
+                            </script>
+
+                        </td>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>获得高新技术企业资质时间</td>
+                        <td colspan="2">
+                            <input type="number" name="head-time" lay-verify="required" class="zp-input">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>成立时间</td>
+                        <td colspan="2">
+                            <input type="text" name="head-setup_time" lay-verify="required"
+                                   autocomplete="off" class="zp-input lay-Date" placeholder="请选择成立时间">
+                        </td>
+                        <td colspan="1" class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>注册资金（万元）</td>
+                        <td colspan="2"><input type="number" lay-verify="required" class="zp-input" name="head-capital"></td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput" colspan="1"><span style="color: rgb(219, 83, 49);">*</span>职工总数（人）</td>
+                        <td colspan="2"><input type="number" lay-verify="required" min="0" class="zp-input" name="head-employee_count"></td>
+                        <td class="zp-bfinput" colspan="1"><span style="color: rgb(219, 83, 49);">*</span>其中本科以上人员（人）</td>
+                        <td colspan="2"><input type="number" lay-verify="required" min="0" class="zp-input" name="head-bachelor_count"></td>
+                    </tr>
+                    <tr>
+                        <td class="zp-bfinput"><span style="color: rgb(219, 83, 49);">*</span>其中研究开发人员（人）</td>
+                        <td><input type="number" lay-verify="required" min="0" class="zp-input" name="head-research_count" ></td>
+                    </tr>
+                </table>
+
+
+                <!--项目实施情况-->
+                <table class="zp-table" style="width: 100%;">
+
+                    <tr class="zp-title">
+                        <td>
+                            <strong> 【项目实施情况（其中软科学研究项目，指研究报告、政策建议、论文与专著等）】</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="" style="margin: 30px; text-align: left">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>(1)项目创新点（不超过500字）</strong>
+                            </label>
+                            <textarea name="p-innovation" id="innovation" placeholder="请输入项目创新点" class="" lay-verify="text500|required"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="7" class="" style="text-align:left">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>(2)技术创新指标（不超过300字）</strong>
+                            </label>
+                            <textarea name="p-innovation-index" id="innovation-index" placeholder="请输入技术创新指标" class="" lay-verify="text300|required" ></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="7" class="" style="text-align:left">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>(3)预期经济、社会、生态效益（不超过500字）</strong>
+                            </label>
+                            <textarea name="p-benefit" placeholder="请输入经济社会效益"  lay-verify="text500|required"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="7" class="" style="text-align:left">
+                            <label class="label">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>(4)预期人才培养、制度建设、对外交流合作等指标（不超过300字）</strong>
+                            </label>
+                            <textarea name="p-strength" id="strength" placeholder="请输入人才培养、知识产权、技术指标等" class="" lay-verify="text300|required" ></textarea>
+                        </td>
+                    </tr>
+
+
+                </table>
+
+                <!--经费预算-->
+                <div class="zp-title" style="margin-bottom: 5px">
+                    <strong>【经费预算】 </strong>
+                </div>
+                <table class="zp-table" id="costBudget" style="text-align: center;  width: 100%;">
+
+                    <tr class="">
+                        <td colspan="12" style="text-align:left">
+                            <span style="color: rgb(219, 83, 49);">*</span>
+                            <strong>(1)经费安排（总投入、研发投入等情况）</strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="12">
+                            <textarea name="p-budget" id="budget" placeholder="请输入经费安排" class="" lay-verify="budget|required"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="12" style="text-align: left">
+                            <div class="" style="margin-bottom: 5px">
+                                <span style="color: rgb(219, 83, 49);">*</span>
+                                <strong>(2)支出预算（单位：万元）</strong>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr class="zp-bfinput" id="costBudget-getData">
+                        <th style="width: 50px;">序号</th>
+
+                        <th colspan="1" style="text-align:left; ">
+                            <span>支出内容</span>
+                        </th>
+                        <th colspan="1" style="text-align:left">金额（万元）</th>
+                        <th colspan="1" style="text-align:left">其中：财政资金（万元）</th>
+                        <th colspan="1" style="text-align:left">操作</th>
+                    </tr>
+
+
+
+                    <tr>
+                        <th style="text-align: center">
+                            <span>1</span>
+                        </th>
+                        <th>
+                            <input type="text" id="subject0" placeholder="请输入支出内容" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <input type="number" id="fund0" placeholder="请输入金额（万元）" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="financial_fund0" placeholder="请输入财政资金（万元）" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <button class="btn btn-delete costBudget-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th style="text-align: center">
+                            <span>2</span>
+                        </th>
+                        <th>
+                            <input type="text" id="subject1" placeholder="请输入支出内容" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <input type="number" id="fund1" placeholder="请输入金额（万元）" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="financial_fund1" placeholder="请输入财政资金（万元）" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <button class="btn btn-delete costBudget-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                </table>
+                <button type="button" class="btn-dashed" id="costBudget-add">新增一行</button>
+
+
+                <div class="zp-title">
+                    <strong>
+                        【项目负责人承担国家和省市重点科技计划项目情况】
+                    </strong>
+                </div>
+                <table class="zp-table" id="bear" style="text-align: center; ">
+
+                    <tr>
+                        <th colspan="1" style="text-align:left;width: 50px;">序号</th>
+                        <th colspan="1" style="text-align:left">项目名称</th>
+                        <th colspan="1" style="text-align:left">立项编号</th>
+                        <th colspan="1" style="text-align:left">经费（万元）</th>
+                        <th colspan="2" style="text-align:left">起止年月</th>
+                        <th colspan="1" style="text-align:left">性质及来源</th>
+                        <th colspan="1" style="text-align:left">操作</th>
+                    </tr>
+
+
+                    <tr>
+                        <th>1</th>
+                        <th>
+                            <input type="text" id="bear-name0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <input type="number" id="bear-code0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="bear-fund0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="bear-start0" placeholder="请输入起始年月" autocomplete="off" lay-verify="required|number6"
+                                   class="zp-input lay-DateM" >
+                        </th>
+                        <th>
+                            <input type="number" id="bear-end0" placeholder="请输入终止年月" autocomplete="off" lay-verify="required|number6"
+                                   class="zp-input lay-DateM" >
+                        </th>
+                        <th>
+                            <input type="text" id="bear-origin0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <button class="btn btn-delete bear-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <th>
+                            <input type="text" id="bear-name1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <input type="number" id="bear-code1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="bear-fund1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="bear-start1" placeholder="请输入起始年月" autocomplete="off" lay-verify="required|number6"
+                                   class="zp-input lay-DateM" >
+                        </th>
+                        <th>
+                            <input type="number" id="bear-end1" placeholder="请输入终止年月" autocomplete="off" lay-verify="required|number6"
+                                   class="zp-input lay-DateM" >
+                        </th>
+                        <th>
+                            <input type="text" id="bear-origin1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <button class="btn btn-delete bear-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                </table>
+                <button type="button" class="btn-dashed" id="bear-add">新增一行</button>
+
+
+                <div class="zp-title">
+                    <strong>
+                        【项目拟购置、试制科研设备清单（单位：万元）】
+                    </strong>
+                </div>
+                <table class="" id="equipmentList" style="text-align: center;margin-top: 5px;">
+                    <tr>
+                        <th colspan="1" style="text-align:left;width: 50px;">序号</th>
+                        <th colspan="1" style="text-align:left">采购内容</th>
+                        <th colspan="1" style="text-align:left">型号</th>
+                        <th colspan="1" style="text-align:left">产地</th>
+                        <th colspan="1" style="text-align:left">数量</th>
+                        <th colspan="1" style="text-align:left">单价(万元)</th>
+                        <th colspan="1" style="text-align:left">金额(万元)</th>
+                        <th colspan="1" style="text-align:left">用途</th>
+                        <th colspan="1" style="text-align:left">经费来源</th>
+                        <th colspan="1" style="text-align:left">操作</th>
+                    </tr>
+
+                    <tr>
+                        <th>1</th>
+                        <th>
+                            <input type="text" id="equipmentList-name0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="equipmentList-type0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="equipmentList-area0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="equipmentList-amount0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="equipmentList-price0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="equipmentList-total0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="equipmentList-function0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="equipmentList-origin0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <button class="btn btn-delete equipmentList-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <th>
+                            <input type="text" id="equipmentList-name1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="equipmentList-type1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="equipmentList-area1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="equipmentList-amount1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="equipmentList-price1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="equipmentList-total1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="equipmentList-function1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="equipmentList-origin1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <button class="btn btn-delete equipmentList-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                </table>
+                <button type="button" class="btn-dashed" id="equipmentList-add">新增一行</button>
+
+
+
+
+
+                <div class="zp-title">
+                    <strong>【企业研发与经营状况】 </strong>
+                </div>
+
+                <table class="zp-table" id="enterprise" style="text-align: left; ">
+
+                    <tr class="zp-bfinput">
+                        <td style="width: 120px;"><span style="color: rgb(219, 83, 49);">*</span>
+                            <span>年份</span>
+                        </td>
+
+                        <td colspan="1"><span style="color: rgb(219, 83, 49);">*</span>企业总资产（万元）</td>
+                        <td colspan="1"><span style="color: rgb(219, 83, 49);">*</span>研发费用支出（万元）</td>
+                        <td colspan="1"><span style="color: rgb(219, 83, 49);">*</span>年度产品销售总额（万元）</td>
+                        <td colspan="1"><span style="color: rgb(219, 83, 49);">*</span>年度纳税额（万元）</td>
+                    </tr>
+
+
+                    <tr>
+                        <th style="width: 120px;text-align: center" class="current-year">
+                            2018年
+                        </th>
+                        <th>
+                            <input type="number" id="assets0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="cost0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input"  >
+                        </th>
+                        <th>
+                            <input type="number" id="sales0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="tax0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input"  >
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th style="width: 120px;text-align: center" class="current-year">
+                            2017年
+                        </th>
+                        <th>
+                            <input type="number" id="assets1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input"  >
+                        </th>
+                        <th>
+                            <input type="number" id="cost1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input"  >
+                        </th>
+                        <th>
+                            <input type="number" id="sales1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="tax1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input"  >
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th style="width: 120px;text-align: center" class="current-year">
+                            2016年
+                        </th>
+                        <th>
+                            <input type="number" id="assets2" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="number" id="cost2" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input"   >
+                        </th>
+                        <th>
+                            <input type="number" id="sales2" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input"  >
+                        </th>
+                        <th>
+                            <input type="number" id="tax2" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input"  >
+                        </th>
+                    </tr>
+
+
+                </table>
+
+
+
+
+                <!--合作单位信息-->
+                <div class="zp-title">
+                    <strong>【合作单位信息】  </strong>
+                </div>
+                <table class="zp-table" style="text-align: left; " id="cooperation">
+                    <tr class="zp-bfinput">
+                        <th style="width: 50px;">序号</th>
+                        <th style="text-align: left">
+                            <span style="color: rgb(219, 83, 49);">*</span>单位名称
+                        </th>
+
+                        <th style="text-align: left">
+                            <span style="color: rgb(219, 83, 49);">*</span>单位性质
+                        </th>
+
+                        <th style="text-align: left">
+                            <span>统一社会信用码</span>
+                        </th>
+                        <th >
+                            <span>操作</span>
+                        </th>
+                    </tr>
+
+
+                    <tr>
+                        <th style="text-align: center">
+                            <span>1</span>
+                        </th>
+                        <th>
+                            <input type="text" id="cooperation-name0" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <input type="text" id="cooperation-type0" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <input type="text" id="cooperation-org_code0" lay-verify="org_code1" placeholder="请输入18位统一社会信用代码（可不填）" autocomplete="off"
+                                   class="zp-input" >
+                        </th>
+                        <th style="text-align: center;">
+                            <button class='btn btn-delete cooperation-del' type='button'>
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th style="text-align: center">
+                            <span>2</span>
+                        </th>
+                        <th>
+                            <input type="text" id="cooperation-name1" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <input type="text" id="cooperation-type1" lay-verify="required" placeholder="请输入" autocomplete="off"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <input type="text" id="cooperation-org_code1" lay-verify="org_code1" placeholder="请输入18位统一社会信用代码（可不填）" autocomplete="off"
+                                   class="zp-input" >
+                        </th>
+                        <th style="text-align: center;">
+                            <button class='btn btn-delete cooperation-del' type='button'>
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                </table>
+                <button type="button" class="btn-dashed" id="cooperation-add">新增一行</button>
+
+
+
+
+                <!--项目主要参与人员-->
+                <div class="zp-title">
+                    <strong>【项目主要参与人员信息】  </strong>
+                </div>
+                <table class="zp-table" id="participate" style="text-align: center; ">
+
+                    <tr class="zp-bfinput">
+                        <th style="width: 50px;">序号</th>
+
+                        <th style="width: 100px;">姓名</th>
+
+                        <th style="width: 80px;">性别</th>
+
+                        <th style="width: 100px;">年龄</th>
+
+                        <th style="width: 100px;">职称</th>
+
+                        <th>身份证号</th>
+
+                        <th>所属单位</th>
+
+                        <th>操作</th>
+                    </tr>
+
+
+
+                    <tr>
+                        <th>
+                            <span>1</span>
+                        </th>
+                        <th>
+                            <input type="text" id="participate-name0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <select id="participate-gender0" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </th>
+
+                        <th>
+                            <input type="number" id="participate-age0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <select id="participate-title0" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                <option value="初级">初级</option>
+                                <option value="中级">中级</option>
+                                <option value="副高">副高</option>
+                                <option value="高级">高级</option>
+                            </select>
+                        </th>
+                        <th>
+                            <input type="text" id="participate-idcode0" placeholder="请输入" autocomplete="off" lay-verify="identity"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="participate-firmName0" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <button class="btn btn-delete participate-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <span>2</span>
+                        </th>
+                        <th>
+                            <input type="text" id="participate-name1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <select id="participate-gender1" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </th>
+
+                        <th>
+                            <input type="number" id="participate-age1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+
+                        <th>
+                            <select id="participate-title1" lay-verify="required" lay-ignore>
+                                <option value=""></option>
+                                <option value="初级">初级</option>
+                                <option value="中级">中级</option>
+                                <option value="副高">副高</option>
+                                <option value="高级">高级</option>
+                            </select>
+                        </th>
+                        <th>
+                            <input type="text" id="participate-idcode1" placeholder="请输入" autocomplete="off" lay-verify="identity"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <input type="text" id="participate-firmName1" placeholder="请输入" autocomplete="off" lay-verify="required"
+                                   class="zp-input" >
+                        </th>
+                        <th>
+                            <button class="btn btn-delete participate-del" type="button">
+                                删除
+                            </button>
+                        </th>
+                    </tr>
+
+                </table>
+
+                <button type="button" class="btn-dashed" id="participate-add">新增一行</button>
+
+                <div class="" style="text-align: center;">
+
+                    <button class="button" lay-submit lay-filter="major_save" >下一步</button>
+
+                </div>
+
+            </form>
+
+
+
+
+        </div>
+
+
+        <div id="fileUpload" hidden>
+            <div class="zp-title"><strong>【上传附件】</strong></div>
+            <div style="background-color: #F2F2F2;">
+                <strong>提示:</strong>
+                <span style="color: red">
+                文件名xx.xx，建议不要使用类似xx.xx.xx的格式，
+                单个附件一定不能超过20MB,
+                多个文件请尽量压缩后再上传！
+            </span>
+            </div>
+
+            <div class="layui-upload" style="padding: 20px;">
+                <div id="upload">
+
+                    <form class="layui-form" method="post" enctype="multipart/form-data">
+                        <input type="file"  style="width: 75px" name="file" lay-verify="required" id="qnfile" >
+
+                        <input type="hidden" name="key"  >
+                        <input type="hidden" name="token"  lay-verify="required">
+
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th>文件名</th>
+                                <th>大小</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="list"></tbody>
+                        </table>
+                        <button type="button"  class="layui-btn" id="qnsubmit"><i class="layui-icon">&#xe67c;</i>上传</button>
+                    </form>
+                </div>
+
+
+                <p style="margin-top: 30px">
+                <blockquote class="layui-elem-quote">
+                    提交前请确认需上传的文件<span style="color:#F22;">是否已上传</span>，暂存后可以修改，一旦提交需退回才可修改
+                </blockquote>
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="button" id="layer_close" >暂存</button>
+                <button class="button"  lay-submit lay-filter="major_submit" style="background: #1E9FFF;">提交</button>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script>
+    layui.use([
+        'apply_global',
+        'render' ,
+        "addTr",
+        "deleteTr",
+        "fileUpload",
+        "verify",
+        'save_data',
+        "submit"
+    ], function(){
+        let $ = layui.$;
+        let render = layui.render;
+        render.Render();
+
+        // let fileUpload = layui.fileUpload;
+        // fileUpload.Render();
+
+        let submit = layui.submit;
+        submit.Render();
+
+
+
+
+    });
+</script>

@@ -1,0 +1,138 @@
+
+<!--
+
+    /**
+     * @author 周鹏
+     * @最后修改日期 2019-06-02
+     */
+     查看页面的download
+
+
+-->
+
+<style>
+    .wrapper {
+        width: 800px;
+        min-height: 350px;
+        border: 1px solid #000;
+        margin:  auto;
+        padding: 5px;
+        background: #eee;
+        border-radius: 20px;
+    }
+    .wrapper h1 {
+        text-shadow:0 -1px 5px rgba(0,0,0,.4);
+        color: #60497C;
+        font-size: 2em;
+        text-align: center;
+        font-weight: bold;
+        margin: 5px;
+    }
+
+</style>
+
+
+<div class="wrapper">
+    <h1>文件下载</h1>
+    <div style="padding: 20px">
+        <div class="layui-upload-list">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>文件名</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="demoList"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    console.log("download.html");
+
+    layui.use(['form', 'table', 'upload', 'laydate', 'element'], function(){
+
+        let $ = layui.jquery;
+        let layer = layui.layer;
+        let setter = layui.setter;
+        let demoListView = $('#demoList');
+
+        // 通过localStorage 获取id
+        let projectId = layui.data(setter.tableName).projectId;
+
+        layer.load();
+
+
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: "/mytio/common/file/getMessa?prjId=" + projectId,
+            success(data) {
+                console.log("data", data);
+                layer.closeAll('loading');
+
+                if(data.ok === false) {
+                    layer.alert('暂无任何文件');
+                }
+
+                if (data.length !== 0) {
+                    for (let i = 0; i < data.length; i++) {
+                        // let tr = $("<tr><td>" + data[i].name + "</td><td>" +
+                        //     "<a class='button' style='box-sizing: border-box'  href=" + data[i].url + ">下载</a>" +"<button id='delete' type='button' class='button' style=\"background:#eb7350;\" name="+data[i].url+">删除</button>"+
+                        //     "</td></tr>");
+                        let tr = $("<tr><td>" + data[i].name + "</td><td>" +
+                            "<a class='button' style='box-sizing: border-box'  href=" + data[i].url + ">下载</a>" +
+                            "</td></tr>");
+                        demoListView.append(tr);
+
+                    }
+
+                    $(document).on("click","#delete",function(){
+                        let str=$(this).attr("name")
+                        // console.log('bbbbb',str)
+                        let id = str.split("_")[1].split(".")[0];
+
+                        console.log("id",id);
+
+
+
+                        let _this = this;
+
+
+
+
+                        $.ajax({
+                            method: "PUT",
+                            dataType: 'json',
+                            url: "/mytio/common/file/upload/delete?id=" +id,
+                        }).done(function (data) {
+                            layer.msg('删除成功');
+                            console.log("delete-done-data", data)
+                            if (data) {
+                                $(_this).parent().parent().remove();
+                            }
+
+                        })
+
+                    })
+
+                }
+
+
+            },
+            error() {
+                // layer.alert('获取文件信息失败!')
+                layer.msg('获取文件信息失败!');
+                layer.closeAll('loading');
+            }
+        });
+
+
+    });
+</script>
+
